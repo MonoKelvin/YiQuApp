@@ -3,7 +3,7 @@ import 'package:flutter/painting.dart';
 import 'package:yiqu/data/AppConfig.dart';
 import 'package:yiqu/data/User.dart';
 import 'package:yiqu/widgets/HeadIconWidget.dart';
-import 'package:yiqu/widgets/LineTextInputWidget.dart';
+import 'package:yiqu/widgets/TextInputWidget.dart';
 
 class LoginPage extends StatefulWidget {
   @override

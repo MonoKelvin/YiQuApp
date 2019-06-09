@@ -6,7 +6,7 @@ import 'package:yiqu/widgets/CategoriesScrollBarWidget.dart';
 import 'package:yiqu/widgets/IconButtonWidget.dart';
 import 'package:yiqu/widgets/IdleCardWidget.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
-import 'package:yiqu/widgets/LineTextInputWidget.dart';
+import 'package:yiqu/widgets/TextInputWidget.dart';
 import 'package:yiqu/widgets/RoundedButtonWidget.dart';
 import 'package:badges/badges.dart';
 

@@ -9,6 +9,7 @@ class IconButtonWidget extends StatefulWidget {
   final Color activeColor;
   final bool isActive;
   final bool isJustClick;
+  final EdgeInsetsGeometry padding;
 
   const IconButtonWidget({
     Key key,
@@ -19,6 +20,7 @@ class IconButtonWidget extends StatefulWidget {
     this.activeColor = AppTheme.unselected,
     @required this.iconData,
     @required this.onPressed,
+    this.padding = const EdgeInsets.all(10.0),
   }) : super(key: key);
 
   @override
@@ -39,32 +41,34 @@ class _IconButtonWidgetState extends State<IconButtonWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return IconButton(
-      icon: Icon(widget.iconData, color: _iconColor, size: widget.size),
-      padding: EdgeInsets.only(top: 12.0, bottom: 12.0),
-      onPressed: () {
-        setState(() {
-          if (widget.isJustClick) {
-            _iconColor = widget.activeColor;
-            Future.delayed(
-                Duration(milliseconds: 100),
-                () => setState(() {
-                      _iconColor = widget.inactiveColor;
-                      widget.onPressed();
-                    }));
-          } else {
-            Future.delayed(
-                Duration(milliseconds: 100),
-                () => setState(() {
-                      _iconColor = widget.isActive
-                          ? widget.inactiveColor
-                          : widget.activeColor;
-                      widget.onPressed();
-                    }));
-            _iconColor = widget.inactiveColor;
-          }
-        });
-      },
+    return Padding(
+      padding: widget.padding,
+      child: InkWell(
+        child: Icon(widget.iconData, color: _iconColor, size: widget.size),
+        onTap: () {
+          setState(() {
+            if (widget.isJustClick) {
+              _iconColor = widget.activeColor;
+              Future.delayed(
+                  Duration(milliseconds: 100),
+                  () => setState(() {
+                        _iconColor = widget.inactiveColor;
+                        widget.onPressed();
+                      }));
+            } else {
+              Future.delayed(
+                  Duration(milliseconds: 100),
+                  () => setState(() {
+                        _iconColor = widget.isActive
+                            ? widget.inactiveColor
+                            : widget.activeColor;
+                        widget.onPressed();
+                      }));
+              _iconColor = widget.inactiveColor;
+            }
+          });
+        },
+      ),
     );
   }
 }

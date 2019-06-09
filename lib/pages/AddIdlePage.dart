@@ -3,9 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:yiqu/data/AppConfig.dart';
-// import 'package:yiqu/data/Commodity.dart';
+import 'package:yiqu/widgets/IconButtonWidget.dart';
+import 'package:yiqu/data/Idle.dart';
 import 'package:yiqu/widgets/ImageBlockWidget.dart';
-import 'package:yiqu/widgets/LineTextInputWidget.dart';
+import 'package:yiqu/widgets/TextInputWidget.dart';
 // import 'package:yiqu/widgets/TosatWidget.dart';
 
 class AddIdlePage extends StatefulWidget {
@@ -14,8 +15,9 @@ class AddIdlePage extends StatefulWidget {
 }
 
 class _AddIdlePageState extends State<AddIdlePage> {
-  // Commodity _currentCommodity;
+  Idle _preIdle;
   var _imgPath;
+  String _currentLable;
   List<File> _images = new List<File>();
 
   Widget _addImage(path) {
@@ -34,6 +36,7 @@ class _AddIdlePageState extends State<AddIdlePage> {
   @override
   void initState() {
     super.initState();
+    // _currentLable = "";
   }
 
   /*拍照*/
@@ -113,8 +116,8 @@ class _AddIdlePageState extends State<AddIdlePage> {
                   padding: EdgeInsets.symmetric(vertical: 8.0),
                 ),
                 TextInputWidget(
-                  hintText: "不超过24个字（包括标点符号）",
-                  maxLength: 24,
+                  hintText: "不超过32个字（包括标点符号）",
+                  maxLength: 32,
                 ),
 
                 // 描述
@@ -122,20 +125,47 @@ class _AddIdlePageState extends State<AddIdlePage> {
                   child: Text("描述", style: AppTheme.titleTextStyle),
                   padding: EdgeInsets.symmetric(vertical: 8.0),
                 ),
-                Container(
-                  height: 200.0,
-                  child: TextInputWidget(
-                    hintText: "描述你的宝贝，让更多人看到 ( • ̀ω•́ )✧",
-                    borderRadius: 8.0,
-                    maxLines: 1000,
-                  ),
+                TextInputWidget(
+                  hintText: "描述你的宝贝，让更多人看到 ( • ̀ω•́ )✧",
+                  maxLength: 1000,
+                  borderRadius: 8.0,
+                  maxLines: 6,
                 ),
 
                 // 标签
-                Padding(
-                  child: Text("标签", style: AppTheme.titleTextStyle),
-                  padding: EdgeInsets.symmetric(vertical: 8.0),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: <Widget>[
+                    Text("标签", style: AppTheme.titleTextStyle),
+                    IconButtonWidget(
+                      iconData: Icons.add_box,
+                      // TODO: 添加标签
+                      onPressed: () {
+                        showDialog(
+                          builder: (BuildContext context) {
+                            return _addLabelDialog();
+                          },
+                          context: context,
+                          barrierDismissible: false,
+                        );
+                      },
+                    ),
+                  ],
                 ),
+                Builder(
+                  builder: (_) {
+                    if (_preIdle.labels.isEmpty) {
+                      return SizedBox(height: 16.0);
+                    }
+                    return Wrap(
+                      children: _preIdle.labels.map((index) {
+                        Chip(
+                          label: Text(index),
+                        );
+                      }).toList(),
+                    );
+                  },
+                )
 
                 /*Column(
                   mainAxisAlignment: MainAxisAlignment.start,
@@ -177,6 +207,52 @@ class _AddIdlePageState extends State<AddIdlePage> {
           ),
         ),
       ),
+    );
+  }
+
+  SimpleDialog _addLabelDialog() {
+    return SimpleDialog(
+      title: Row(
+        children: <Widget>[
+          Icon(Icons.edit, size: 20.0),
+          SizedBox(width: 8.0),
+          Text("添加标签", style: AppTheme.titleTextStyle),
+        ],
+      ),
+      backgroundColor: AppTheme.mainBackground,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8.0)),
+      children: <Widget>[
+        SimpleDialogOption(
+          child: TextInputWidget(
+            hintText: "标签名",
+            maxLength: 8,
+            onChanged: (String value) {
+              setState(() {
+                _currentLable = value;
+              });
+            },
+          ),
+        ),
+        SimpleDialogOption(
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: <Widget>[
+              IconButtonWidget(
+                iconData: Icons.close,
+                padding: EdgeInsets.symmetric(horizontal: 8.0),
+                onPressed: () {},
+              ),
+              IconButtonWidget(
+                iconData: Icons.check,
+                padding: EdgeInsets.symmetric(horizontal: 8.0),
+                onPressed: () {
+                  _preIdle.labels.add(_currentLable);
+                },
+              ),
+            ],
+          ),
+        ),
+      ],
     );
   }
 }

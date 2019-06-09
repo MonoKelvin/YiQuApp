@@ -36,7 +36,7 @@ class MyApp extends StatelessWidget {
         // toggleableActiveColor: AppTheme.mainDark,
         // unselectedWidgetColor: AppTheme.widgetBackground,
         // textSelectionColor: AppTheme.mainDark,
-        disabledColor: AppTheme.inactive,
+        disabledColor: AppTheme.widgetBackground,
         splashColor: AppTheme.mainBackground,
         hintColor: AppTheme.inactive,
 

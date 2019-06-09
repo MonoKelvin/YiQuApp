@@ -10,9 +10,9 @@ class TextInputWidget extends StatefulWidget {
   final int maxLength;
   final int maxLines;
   final bool isPassword;
-  final VoidCallback onCompleted;
   final double borderRadius;
-  // final bool isDigital;
+  final VoidCallback onCompleted;
+  final Function(String value) onChanged;
 
   /// #### 验证内容的回调函数
   /// 参数：`value` 表示输入框中的内容
@@ -31,6 +31,7 @@ class TextInputWidget extends StatefulWidget {
     this.icon,
     this.onCompleted,
     this.borderRadius = 100.0,
+    this.onChanged,
     // this.isDigital = false,
   }) : super(key: key);
 
@@ -43,26 +44,6 @@ class TextInputWidget extends StatefulWidget {
 
 class _TextInputWidgetState extends State<TextInputWidget> {
   bool _isInputError = false;
-
-  String validator(String value) {
-    if (widget.validator == null) {
-      _isInputError = false;
-      return null;
-    }
-
-    if (widget.validator(value) == false) {
-      setState(() {
-        _isInputError = true;
-      });
-      return widget.errorText;
-    }
-
-    setState(() {
-      _isInputError = false;
-    });
-
-    return null;
-  }
 
   Widget _icon() {
     if (widget.icon == null) {
@@ -78,9 +59,9 @@ class _TextInputWidgetState extends State<TextInputWidget> {
   @override
   Widget build(BuildContext context) {
     return Stack(alignment: AlignmentDirectional.center, children: <Widget>[
-      TextFormField(
+      TextField(
         maxLength: widget.maxLength,
-        maxLines: 1,
+        maxLines: widget.maxLines,
         cursorRadius: Radius.circular(10.0),
         obscureText: widget.isPassword,
         decoration: InputDecoration(
@@ -95,8 +76,8 @@ class _TextInputWidgetState extends State<TextInputWidget> {
                   : AppTheme.inactive,
               fontSize: 14.0),
           contentPadding: EdgeInsets.only(
-              left: widget.icon == null ? 16.0 : 36.0,
-              right: 16.0,
+              left: widget.icon == null ? 12.0 : 36.0,
+              right: 12.0,
               top: 12.0,
               bottom: 12.0),
           border: OutlineInputBorder(
@@ -104,13 +85,8 @@ class _TextInputWidgetState extends State<TextInputWidget> {
             borderSide: BorderSide.none,
           ),
         ),
-
-        // onSaved: (value) {
-        //   print(value);
-        // },
         onEditingComplete: widget.onCompleted,
-        validator: validator,
-        // autovalidate: true, //不需点击提交也会实时验证
+        onChanged: widget.onChanged,
       ),
       _icon(),
     ]);
@@ -120,6 +96,7 @@ class _TextInputWidgetState extends State<TextInputWidget> {
 class DigitalInputWidget extends StatelessWidget {
   final String hintText;
   final int maxLength;
+  final int maxlines;
   final VoidCallback onCompleted;
   final double borderRadius;
 
@@ -127,15 +104,16 @@ class DigitalInputWidget extends StatelessWidget {
     Key key,
     this.hintText,
     this.maxLength,
+    this.maxlines = 1,
     this.onCompleted,
     this.borderRadius = 4.0,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return TextFormField(
+    return TextField(
       maxLength: maxLength,
-      maxLines: 1,
+      maxLines: maxlines,
       cursorRadius: Radius.circular(10.0),
       keyboardType: TextInputType.phone,
       inputFormatters: <TextInputFormatter>[
