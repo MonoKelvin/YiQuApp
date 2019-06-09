@@ -10,6 +10,7 @@ class TextInputWidget extends StatefulWidget {
   final int maxLength;
   final int maxLines;
   final bool isPassword;
+  final bool isDigital;
   final double borderRadius;
   final VoidCallback onCompleted;
   final Function(String value) onChanged;
@@ -27,6 +28,7 @@ class TextInputWidget extends StatefulWidget {
     this.maxLines = 1,
     this.errorText,
     this.isPassword = false,
+    this.isDigital = false,
     this.validator,
     this.icon,
     this.onCompleted,
@@ -64,6 +66,11 @@ class _TextInputWidgetState extends State<TextInputWidget> {
         maxLines: widget.maxLines,
         cursorRadius: Radius.circular(10.0),
         obscureText: widget.isPassword,
+        keyboardType:
+            widget.isDigital ? TextInputType.number : TextInputType.text,
+        inputFormatters: widget.isDigital ? <TextInputFormatter>[
+          WhitelistingTextInputFormatter.digitsOnly,
+        ]:null,
         decoration: InputDecoration(
           hintText: widget.hintText,
           filled: true,
@@ -90,47 +97,5 @@ class _TextInputWidgetState extends State<TextInputWidget> {
       ),
       _icon(),
     ]);
-  }
-}
-
-class DigitalInputWidget extends StatelessWidget {
-  final String hintText;
-  final int maxLength;
-  final int maxlines;
-  final VoidCallback onCompleted;
-  final double borderRadius;
-
-  const DigitalInputWidget({
-    Key key,
-    this.hintText,
-    this.maxLength,
-    this.maxlines = 1,
-    this.onCompleted,
-    this.borderRadius = 4.0,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return TextField(
-      maxLength: maxLength,
-      maxLines: maxlines,
-      cursorRadius: Radius.circular(10.0),
-      keyboardType: TextInputType.phone,
-      inputFormatters: <TextInputFormatter>[
-        WhitelistingTextInputFormatter.digitsOnly,
-      ],
-      decoration: InputDecoration(
-        hintText: hintText,
-        filled: true,
-        fillColor: AppTheme.widgetBackground,
-        hintStyle: AppTheme.inactiveTextStyle.copyWith(fontSize: 12.0),
-        contentPadding: EdgeInsets.all(8.0),
-        border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(borderRadius),
-          borderSide: BorderSide.none,
-        ),
-      ),
-      onEditingComplete: onCompleted,
-    );
   }
 }

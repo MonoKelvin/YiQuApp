@@ -37,7 +37,7 @@ class Idle {
   String description;
 
   /// #### 发布的时间
-  DateTime timeOfTheDay;
+  DateTime timeOfTheDay = DateTime.now();
 
   /// #### 所属的分类
   String category;
@@ -52,22 +52,21 @@ class Idle {
   //点赞（满意）数量
   int satisfiedCount = 0;
 
-  List<String> labels = List<String>();
+  List<String> labels = new List<String>();
 
   Idle(
     this._user, {
     this.images,
     this.price,
     this.labels,
-    @required this.title,
-    @required this.description,
-    @required this.idleType,
-    @required this.category,
+    this.title,
+    this.description,
+    this.idleType,
+    this.category,
   }) {
-    timeOfTheDay = DateTime.now();
-    if (idleType != EIdleType.Sell) {
-      price = 0.0;
-    }
+    // if (idleType != EIdleType.Sell) {
+    //   price = 0.0;
+    // }
   }
 
   String getMonthAndDay() {

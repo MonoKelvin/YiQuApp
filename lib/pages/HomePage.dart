@@ -236,7 +236,9 @@ class _HomePageState extends State<HomePage> {
               Expanded(
                 child: Container(
                   width: 50.0,
-                  child: DigitalInputWidget(
+                  child: TextInputWidget(
+                    borderRadius: 4.0,
+                    isDigital: true,
                     hintText: "最低",
                   ),
                 ),
@@ -250,7 +252,9 @@ class _HomePageState extends State<HomePage> {
               Expanded(
                 child: Container(
                   width: 50.0,
-                  child: DigitalInputWidget(
+                  child: TextInputWidget(
+                    borderRadius: 4.0,
+                    isDigital: true,
                     hintText: "最高",
                   ),
                 ),

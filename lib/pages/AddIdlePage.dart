@@ -15,7 +15,7 @@ class AddIdlePage extends StatefulWidget {
 }
 
 class _AddIdlePageState extends State<AddIdlePage> {
-  Idle _preIdle;
+  Idle _preIdle = new Idle(kimono);
   var _imgPath;
   String _currentLable;
   List<File> _images = new List<File>();
@@ -36,7 +36,7 @@ class _AddIdlePageState extends State<AddIdlePage> {
   @override
   void initState() {
     super.initState();
-    // _currentLable = "";
+    _preIdle.labels = List();
   }
 
   /*拍照*/
@@ -132,6 +132,30 @@ class _AddIdlePageState extends State<AddIdlePage> {
                   maxLines: 6,
                 ),
 
+                // 定价*
+                Padding(
+                  child: Text("定价", style: AppTheme.titleTextStyle),
+                  padding: EdgeInsets.symmetric(vertical: 8.0),
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: <Widget>[
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 4.0),
+                      child: Text("￥",
+                          style: AppTheme.inactiveTextStyle
+                              .copyWith(fontSize: 16.0)),
+                    ),
+                    Expanded(
+                      child: TextInputWidget(
+                        borderRadius: 50.0,
+                        isDigital: true,
+                        hintText: "出售金额",
+                      ),
+                    ),
+                  ],
+                ),
+
                 // 标签
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -146,58 +170,39 @@ class _AddIdlePageState extends State<AddIdlePage> {
                             return _addLabelDialog();
                           },
                           context: context,
-                          barrierDismissible: false,
                         );
                       },
                     ),
                   ],
                 ),
+
+                // 标签 Chip
                 Builder(
                   builder: (_) {
-                    if (_preIdle.labels.isEmpty) {
+                    if (_preIdle.labels == null) {
                       return SizedBox(height: 16.0);
                     }
                     return Wrap(
-                      children: _preIdle.labels.map((index) {
-                        Chip(
-                          label: Text(index),
-                        );
+                      spacing: 4.0,
+                      children: _preIdle.labels.map((chip) {
+                        return Builder(builder: (BuildContext context) {
+                          return Chip(
+                            padding: EdgeInsets.symmetric(horizontal: 8.0),
+                            label: Text(chip, style: AppTheme.subTextStyle),
+                            backgroundColor: AppTheme.widgetBackground,
+                            deleteIcon: Icon(Icons.close,
+                                size: 18.0, color: AppTheme.inactive),
+                            onDeleted: () {
+                              setState(() {
+                                _preIdle.labels.remove(chip);
+                              });
+                            },
+                          );
+                        });
                       }).toList(),
                     );
                   },
-                )
-
-                /*Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: <Widget>[
-                    Checkbox(
-                      onChanged: (bool value) {},
-                      value: false,
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: <Widget>[
-                        Checkbox(
-                          onChanged: (bool value) {},
-                          value: true,
-                        ),
-                        Row(
-                          children: <Widget>[
-                            Text("定价"),
-                            LineTextInputWidget(),
-                            Text("元"),
-                          ],
-                        ),
-                      ],
-                    ),
-                  ],
                 ),
-
-                // 附加信息
-                Padding(
-                  child: Text("附加信息", style: AppTheme.titleTextStyle),
-                  padding: EdgeInsets.only(),
-                ),*/
 
                 // Positioned(
                 //   child: null,
@@ -210,8 +215,8 @@ class _AddIdlePageState extends State<AddIdlePage> {
     );
   }
 
-  SimpleDialog _addLabelDialog() {
-    return SimpleDialog(
+  AlertDialog _addLabelDialog() {
+    return AlertDialog(
       title: Row(
         children: <Widget>[
           Icon(Icons.edit, size: 20.0),
@@ -219,38 +224,41 @@ class _AddIdlePageState extends State<AddIdlePage> {
           Text("添加标签", style: AppTheme.titleTextStyle),
         ],
       ),
+      content: TextInputWidget(
+        hintText: "标签名",
+        maxLength: 8,
+        onChanged: (String value) {
+          setState(() {
+            _currentLable = value;
+          });
+        },
+      ),
       backgroundColor: AppTheme.mainBackground,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8.0)),
-      children: <Widget>[
-        SimpleDialogOption(
-          child: TextInputWidget(
-            hintText: "标签名",
-            maxLength: 8,
-            onChanged: (String value) {
-              setState(() {
-                _currentLable = value;
-              });
-            },
-          ),
+      actions: <Widget>[
+        IconButtonWidget(
+          iconData: Icons.close,
+          padding: EdgeInsets.only(top: 0, right: 16.0, bottom: 10.0),
+          onPressed: () {
+            _currentLable = "";
+            Navigator.of(context).pop();
+          },
         ),
-        SimpleDialogOption(
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: <Widget>[
-              IconButtonWidget(
-                iconData: Icons.close,
-                padding: EdgeInsets.symmetric(horizontal: 8.0),
-                onPressed: () {},
-              ),
-              IconButtonWidget(
-                iconData: Icons.check,
-                padding: EdgeInsets.symmetric(horizontal: 8.0),
-                onPressed: () {
-                  _preIdle.labels.add(_currentLable);
-                },
-              ),
-            ],
-          ),
+        IconButtonWidget(
+          iconData: Icons.check,
+          padding: EdgeInsets.only(top: 0, right: 16.0, bottom: 10.0),
+          onPressed: () {
+            setState(() {
+              if (_preIdle.labels == null ||
+                  _currentLable == null ||
+                  _currentLable.trim() == "" ||
+                  _preIdle.labels.contains(_currentLable)) return;
+
+              _preIdle.labels.add(_currentLable);
+              _currentLable = "";
+            });
+            Navigator.of(context).pop();
+          },
         ),
       ],
     );
