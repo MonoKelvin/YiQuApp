@@ -138,7 +138,7 @@ class _HomePageState extends State<HomePage> {
                                 ],
                           ),
                           Expanded(
-                            child: LineTextInputWidget(
+                            child: TextInputWidget(
                               hintText: "搜索你想要的闲置吧(๑*◡*๑)",
                               icon:
                                   Icon(Icons.search, color: AppTheme.inactive),
@@ -227,6 +227,12 @@ class _HomePageState extends State<HomePage> {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: <Widget>[
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 4.0),
+                child: Text("￥", style: AppTheme.inactiveTextStyle.copyWith(
+                  fontSize: 16.0
+                )),
+              ),
               Expanded(
                 child: Container(
                   width: 50.0,

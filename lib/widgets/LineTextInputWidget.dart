@@ -3,11 +3,12 @@ import 'package:flutter/painting.dart';
 import 'package:flutter/services.dart';
 import 'package:yiqu/data/AppConfig.dart';
 
-class LineTextInputWidget extends StatefulWidget {
+class TextInputWidget extends StatefulWidget {
   final Icon icon;
   final String hintText;
   final String errorText;
   final int maxLength;
+  final int maxLines;
   final bool isPassword;
   final VoidCallback onCompleted;
   final double borderRadius;
@@ -19,10 +20,11 @@ class LineTextInputWidget extends StatefulWidget {
   /// 验证无误则返回`true`，验证失败则返回`false`
   final bool Function(String value) validator;
 
-  LineTextInputWidget({
+  TextInputWidget({
     Key key,
     this.hintText,
     this.maxLength,
+    this.maxLines = 1,
     this.errorText,
     this.isPassword = false,
     this.validator,
@@ -36,10 +38,10 @@ class LineTextInputWidget extends StatefulWidget {
   // String get getText => _text;
 
   @override
-  _LineTextInputWidgetState createState() => _LineTextInputWidgetState();
+  _TextInputWidgetState createState() => _TextInputWidgetState();
 }
 
-class _LineTextInputWidgetState extends State<LineTextInputWidget> {
+class _TextInputWidgetState extends State<TextInputWidget> {
   bool _isInputError = false;
 
   String validator(String value) {
@@ -62,6 +64,17 @@ class _LineTextInputWidgetState extends State<LineTextInputWidget> {
     return null;
   }
 
+  Widget _icon() {
+    if (widget.icon == null) {
+      return SizedBox();
+    } else {
+      return Positioned(
+        child: widget.icon,
+        left: 10.0,
+      );
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Stack(alignment: AlignmentDirectional.center, children: <Widget>[
@@ -81,8 +94,11 @@ class _LineTextInputWidgetState extends State<LineTextInputWidget> {
                   ? AppTheme.mainRed.withOpacity(0.2)
                   : AppTheme.inactive,
               fontSize: 14.0),
-          contentPadding:
-              EdgeInsets.only(left: 36.0, right: 16.0, top: 12.0, bottom: 12.0),
+          contentPadding: EdgeInsets.only(
+              left: widget.icon == null ? 16.0 : 36.0,
+              right: 16.0,
+              top: 12.0,
+              bottom: 12.0),
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(widget.borderRadius),
             borderSide: BorderSide.none,
@@ -96,10 +112,7 @@ class _LineTextInputWidgetState extends State<LineTextInputWidget> {
         validator: validator,
         // autovalidate: true, //不需点击提交也会实时验证
       ),
-      Positioned(
-        child: widget.icon,
-        left: 10.0,
-      ),
+      _icon(),
     ]);
   }
 }

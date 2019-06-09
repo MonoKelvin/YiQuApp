@@ -71,7 +71,7 @@ class _LoginPageState extends State<LoginPage> {
               child: Column(
                 children: <Widget>[
                   // 输入账号文本框
-                  LineTextInputWidget(
+                  TextInputWidget(
                     hintText: "输入账号",
                     errorText: "账号不能为空",
                     maxLength: 22,
@@ -83,7 +83,7 @@ class _LoginPageState extends State<LoginPage> {
                   SizedBox(height: 8.0),
 
                   // 输入密码文本框
-                  LineTextInputWidget(
+                  TextInputWidget(
                     icon: Icon(Icons.lock, color: AppTheme.mainDark),
                     hintText: "输入密码",
                     errorText: "密码不能为空",
