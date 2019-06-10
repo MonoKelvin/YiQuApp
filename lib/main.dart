@@ -14,7 +14,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: AddIdlePage(),
+      home: YiQuApp(),
       debugShowCheckedModeBanner: false,
       //IdleDetailsPage(idle: myIdles[0]), //MessagePage(friendUser: kimono),
       // localizationsDelegates: [
@@ -39,6 +39,7 @@ class MyApp extends StatelessWidget {
         // textSelectionColor: AppTheme.mainDark,
         disabledColor: AppTheme.widgetBackground,
         splashColor: AppTheme.mainBackground,
+
         hintColor: AppTheme.inactive,
 
         // accentColor: AppTheme.mainBlue,

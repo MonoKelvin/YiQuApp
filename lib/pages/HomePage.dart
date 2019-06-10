@@ -238,7 +238,7 @@ class _HomePageState extends State<HomePage> {
                   width: 50.0,
                   child: TextInputWidget(
                     borderRadius: 4.0,
-                    isDigital: true,
+                    format: EInputFormat.Number,
                     hintText: "最低",
                   ),
                 ),
@@ -254,7 +254,7 @@ class _HomePageState extends State<HomePage> {
                   width: 50.0,
                   child: TextInputWidget(
                     borderRadius: 4.0,
-                    isDigital: true,
+                    format: EInputFormat.Number,
                     hintText: "最高",
                   ),
                 ),

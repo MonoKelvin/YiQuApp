@@ -89,7 +89,7 @@ class _LoginPageState extends State<LoginPage> {
                     errorText: "密码不能为空",
                     maxLength: 16,
                     validator: validatePassword,
-                    isPassword: true,
+                    format: EInputFormat.Passward,
                   ),
 
                   // 注册新用户和忘记密码

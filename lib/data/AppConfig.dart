@@ -58,6 +58,11 @@ class AppTheme {
     color: mainDark,
   );
 
+  static const TextStyle alertTextStyle = TextStyle(
+    fontSize: 16.0,
+    color: mainRed,
+  );
+
   static const TextStyle bigestTextStyle = TextStyle(
     // fontWeight: FontWeight.bold,
     fontSize: 32.0,
