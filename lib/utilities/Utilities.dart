@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:flutter/services.dart';
 import 'package:path_provider/path_provider.dart';
 
 /// 此文件操作类只在 `应用所在文件夹下` 操作
@@ -8,7 +9,7 @@ class FileOperation {
   static String buffer;
 
   /// 将数据内容写入指定文件中
-  static void writeFile(String folderName) async {
+  static void writeBuffer(String folderName) async {
     Directory documentsDir = await getApplicationDocumentsDirectory();
     String documentsPath = documentsDir.path;
 
@@ -21,7 +22,7 @@ class FileOperation {
     await file.writeAsString(buffer);
   }
 
-  static void readFile(String folderName) async {
+  static void readBuffer(String folderName) async {
     Directory documentsDir = await getApplicationDocumentsDirectory();
     String documentsPath = documentsDir.path;
 
@@ -37,6 +38,17 @@ class FileOperation {
       Map<String, dynamic> jsonData, String folderName) async {
     print(jsonData.toString());
   }
+
+  /// #### `[fileName]`文件名，默认在`assets/datas`文件夹下
+  /// 故只要写文件名即可，如：
+  ///
+  /// `user.jon` 或 `myfile.txt`
+  ///
+  /// 不要写成 `datas/user.jon`
+  static Future<String> loadFileToString(String fileName) async {
+    return await rootBundle.loadString('assets/datas/$fileName');
+  }
+
 }
 
 /**

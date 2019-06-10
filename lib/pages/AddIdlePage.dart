@@ -1,11 +1,10 @@
-import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:yiqu/data/AppConfig.dart';
-import 'package:yiqu/utilities/FileOperation.dart';
+import 'package:yiqu/utilities/Utilities.dart';
 import 'package:yiqu/widgets/IconButtonWidget.dart';
 import 'package:yiqu/data/Idle.dart';
 import 'package:yiqu/widgets/ImageBlockWidget.dart';
@@ -13,7 +12,6 @@ import 'package:yiqu/widgets/PromptWidgetDialog.dart';
 import 'package:yiqu/widgets/RoundedButtonWidget.dart';
 import 'package:yiqu/widgets/TextInputWidget.dart';
 import 'package:yiqu/widgets/TosatWidget.dart';
-// import 'package:yiqu/widgets/TosatWidget.dart';
 
 class AddIdlePage extends StatefulWidget {
   @override
@@ -21,7 +19,7 @@ class AddIdlePage extends StatefulWidget {
 }
 
 class _AddIdlePageState extends State<AddIdlePage> {
-  Idle _preIdle = new Idle(kimono);
+  Idle _preIdle = new Idle(myself);
   var _imgPath;
   int _groupValue = -1;
   String _currentLable;

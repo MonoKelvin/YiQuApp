@@ -1,21 +1,47 @@
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:yiqu/data/AppConfig.dart';
-import 'package:yiqu/pages/AddIdlePage.dart';
 // import 'package:yiqu/data/AppIconFont.dart';
 import 'package:yiqu/pages/HomePage.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:yiqu/pages/LoginPage.dart';
 import 'package:yiqu/pages/NoticesPage.dart';
 import 'package:yiqu/pages/PersonalCenterPage.dart';
+
+import 'data/User.dart';
 // import 'package:flutter_localizations/flutter_localizations.dart';
 
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
+  _getLoginState() async {
+    try {
+      myself = User(
+          headImage: Image.network(
+        "https://cdn.pixabay.com/photo/2016/04/10/21/34/woman-1320810_960_720.jpg",
+        fit: BoxFit.cover,
+      ));
+      myself.setUserName = "托尼史塔克";
+      myself.setAccount = "15007083506@qq.com";
+      myself.setPassword = "WarMachineCoolX";
+      myself.setAddress = "合肥工业大学宣城校区三号宿舍楼";
+      myself.gender = "合肥工业大学宣城校区三号宿舍楼";
+      myself.signiture = "I am Iron Man";
+      myself.freshToJsonFile("user.json");
+
+      myself = await User.getDataFromJson("user.json");
+
+    } catch (err) {
+      print(err);
+      exit(255);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
+    _getLoginState();
     return MaterialApp(
-      home: LoginPage(),
+      home: myself.getUuid == null?LoginPage():YiQuApp(),
       debugShowCheckedModeBanner: false,
       //IdleDetailsPage(idle: myIdles[0]), //MessagePage(friendUser: kimono),
       // localizationsDelegates: [
@@ -29,49 +55,44 @@ class MyApp extends StatelessWidget {
       //   const Locale('en', 'US'),
       // ],
       theme: Theme.of(context).copyWith(
-        // buttonColor: AppTheme.mainDark,
-        // cardColor: AppTheme.mainBackground,
-        // dialogBackgroundColor: AppTheme.mainBackground,
-        // dividerColor: AppTheme.widgetBackground,
-        // primaryIconTheme: AppTheme.iconActiveStyle,
-        // selectedRowColor: AppTheme.widgetBackground,
-        // toggleableActiveColor: AppTheme.mainDark,
-        // unselectedWidgetColor: AppTheme.widgetBackground,
-        // textSelectionColor: AppTheme.mainDark,
-        disabledColor: AppTheme.widgetBackground,
-        splashColor: AppTheme.mainBackground,
+          // buttonColor: AppTheme.mainDark,
+          // cardColor: AppTheme.mainBackground,
+          // dialogBackgroundColor: AppTheme.mainBackground,
+          // dividerColor: AppTheme.widgetBackground,
+          // primaryIconTheme: AppTheme.iconActiveStyle,
+          // selectedRowColor: AppTheme.widgetBackground,
+          // toggleableActiveColor: AppTheme.mainDark,
+          // unselectedWidgetColor: AppTheme.widgetBackground,
+          // textSelectionColor: AppTheme.mainDark,
+          disabledColor: AppTheme.widgetBackground,
+          splashColor: AppTheme.mainBackground,
+          hintColor: AppTheme.inactive,
 
-        hintColor: AppTheme.inactive,
+          // accentColor: AppTheme.mainBlue,
+          // accentTextTheme: TextTheme(
+          //   body1: AppTheme.titleTextStyle,
+          // ),
+          // primaryTextTheme: TextTheme(
+          //   body1: AppTheme.titleTextStyle,
+          // ),
 
-        // accentColor: AppTheme.mainBlue,
-        // accentTextTheme: TextTheme(
-        //   body1: AppTheme.titleTextStyle,
-        // ),
-        // primaryTextTheme: TextTheme(
-        //   body1: AppTheme.titleTextStyle,
-        // ),
+          scaffoldBackgroundColor: AppTheme.mainBackground,
+          highlightColor: AppTheme.mainBackground,
+          cursorColor: AppTheme.mainDark,
+          appBarTheme: AppBarTheme.of(context).copyWith(
+            color: AppTheme.mainBackground,
+            elevation: 0.0,
+            iconTheme: AppTheme.iconActiveStyle,
+            textTheme: TextTheme(title: AppTheme.largeTitleTextStyle),
+          ),
+          iconTheme: IconThemeData(color: AppTheme.mainDark, size: 24.0)
 
-        scaffoldBackgroundColor: AppTheme.mainBackground,
-        highlightColor: AppTheme.mainBackground,
-        cursorColor: AppTheme.mainDark,
-        appBarTheme: AppBarTheme.of(context).copyWith(
-          color: AppTheme.mainBackground,
-          elevation: 0.0,
-          iconTheme: AppTheme.iconActiveStyle,
-          textTheme: TextTheme(title: AppTheme.largeTitleTextStyle),
-        ),
-
-        iconTheme: IconThemeData(
-          color: AppTheme.mainDark,
-          size: 24.0
-        )
-
-        // bottomAppBarTheme: BottomAppBarTheme.of(context).copyWith(
-        //   elevation: 20.0,
-        //   color: AppTheme.mainBackground,
-        //   shape: CircularNotchedRectangle(),
-        // ),
-      ),
+          // bottomAppBarTheme: BottomAppBarTheme.of(context).copyWith(
+          //   elevation: 20.0,
+          //   color: AppTheme.mainBackground,
+          //   shape: CircularNotchedRectangle(),
+          // ),
+          ),
     );
   }
 }

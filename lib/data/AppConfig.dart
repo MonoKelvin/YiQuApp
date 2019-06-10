@@ -115,17 +115,24 @@ class AppTheme {
   );
 }
 
-User kimono = User("Kimono", "123456",
-    headImage: Image.network(
-      "https://cdn.pixabay.com/photo/2016/04/10/21/34/woman-1320810_960_720.jpg",
-      fit: BoxFit.cover,
-    ));
+// {
+//     "uuid":"",
+//     "userName": "托尼史塔克",
+//     "account": "15007083506@qq.com",
+//     "password": "WarMachineCoolX",
+//     "address": "合肥工业大学宣城校区三号宿舍楼",
+//     "headImage": "assets/images/girl_for_user.png",
+//     "gender": "男",
+//     "signiture": "I am Iron Man!"
+// }
+
+User myself = new User();
 
 // TODO: 不应该直接给出，应要动态创建内容
 /// #### 我的所有商品
 List<Idle> myIdles = [
   Idle(
-    kimono,
+    myself,
     title: "魅族EP51蓝牙耳机",
     category: categories[2],
     labels: [
@@ -152,7 +159,7 @@ List<Idle> myIdles = [
     ],
   ),
   Idle(
-    kimono,
+    myself,
     title: "YSL方管小金条21圣罗兰杨树林口红",
     category: categories[3],
     labels: [
@@ -171,7 +178,7 @@ List<Idle> myIdles = [
     ],
   ),
   Idle(
-    kimono,
+    myself,
     title: "铁艺服装架服装店衣架展示架落地式女装店陈列中岛架",
     category: categories[3],
     labels: [
@@ -191,7 +198,7 @@ List<Idle> myIdles = [
     ],
   ),
   Idle(
-    kimono,
+    myself,
     title: "ysl唇釉12",
     category: categories[3],
     labels: [
@@ -210,7 +217,7 @@ List<Idle> myIdles = [
     ],
   ),
   Idle(
-    kimono,
+    myself,
     title: "施华洛世奇项链",
     category: categories[1],
     labels: [

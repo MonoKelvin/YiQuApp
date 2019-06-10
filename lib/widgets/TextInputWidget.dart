@@ -21,12 +21,6 @@ class TextInputWidget extends StatefulWidget {
   final VoidCallback onCompleted;
   final Function(String value) onChanged;
 
-  /// #### 验证内容的回调函数
-  /// 参数：`value` 表示输入框中的内容
-  ///
-  /// 验证无误则返回`true`，验证失败则返回`false`
-  final bool Function(String value) validator;
-
   TextInputWidget({
     Key key,
     this.hintText,
@@ -34,7 +28,6 @@ class TextInputWidget extends StatefulWidget {
     this.maxLines = 1,
     this.errorText,
     this.format = EInputFormat.Text,
-    this.validator,
     this.icon,
     this.onCompleted,
     this.borderRadius = 100.0,
@@ -59,6 +52,7 @@ class _TextInputWidgetState extends State<TextInputWidget> {
       return Positioned(
         child: widget.icon,
         left: 10.0,
+        top: 10.0,
       );
     }
   }
@@ -96,7 +90,7 @@ class _TextInputWidgetState extends State<TextInputWidget> {
                   : AppTheme.inactive,
               fontSize: 14.0),
           contentPadding: EdgeInsets.only(
-              left: widget.icon == null ? 16.0 : 36.0,
+              left: widget.icon == null ? 16.0 : 40.0,
               right: 12.0,
               top: 12.0,
               bottom: 12.0),

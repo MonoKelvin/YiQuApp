@@ -41,15 +41,15 @@ class _PersonalCenterPageState extends State<PersonalCenterPage> {
               child: Column(
                 children: <Widget>[
                   HeadIconWidget(
-                    user: kimono,
+                    user: myself,
                     radius: 60.0,
                     isRoutePage: false,
                   ),
                   Text(
-                    "@${kimono.getUserName}",
+                    "@${myself.getUserName}",
                     style: AppTheme.titleTextStyle.copyWith(height: 2.0),
                   ),
-                  Text(kimono.signiture,
+                  Text(myself.signiture,
                       style: AppTheme.subtitleTextStyle.copyWith(
                         color: AppTheme.activeWhenPressed,
                       )),

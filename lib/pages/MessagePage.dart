@@ -37,7 +37,7 @@ class MessagePageState extends State<MessagePage>
     DateTime time = DateTime.now();
 
     ChatMessage message = ChatMessage(
-      kimono,
+      myself,
       text: text,
       isMe: true,
       time: time.toString().substring(5, 19),
