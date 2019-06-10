@@ -5,6 +5,7 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:yiqu/data/AppConfig.dart';
+import 'package:yiqu/utilities/FileOperation.dart';
 import 'package:yiqu/widgets/IconButtonWidget.dart';
 import 'package:yiqu/data/Idle.dart';
 import 'package:yiqu/widgets/ImageBlockWidget.dart';
@@ -21,9 +22,9 @@ class AddIdlePage extends StatefulWidget {
 class _AddIdlePageState extends State<AddIdlePage> {
   Idle _preIdle = new Idle(kimono);
   var _imgPath;
+  int _groupValue = -1;
   String _currentLable;
   List<Widget> _imgBlockList = List<Widget>();
-
   Container _photoAdder;
 
   @override
@@ -196,6 +197,39 @@ class _AddIdlePageState extends State<AddIdlePage> {
               ],
             ),
 
+            // 分类
+            Padding(
+              child: Text("分类*", style: AppTheme.titleTextStyle),
+              padding: EdgeInsets.symmetric(vertical: 8.0),
+            ),
+            GridView.count(
+              padding: EdgeInsets.all(6.0),
+              crossAxisCount: 3,
+              crossAxisSpacing: 8.0,
+              mainAxisSpacing: 8.0,
+              childAspectRatio: 2.5,
+              shrinkWrap: true,
+              children: categories.map((value) {
+                final bool tmp = _groupValue == categories.indexOf(value);
+                return FlatButton(
+                  color: tmp ? AppTheme.mainDark : AppTheme.widgetBackground,
+                  onPressed: () {
+                    setState(() {
+                      _groupValue = categories.indexOf(value);
+                      _preIdle.category = value;
+                    });
+                  },
+                  child: Text(
+                    value,
+                    style: tmp
+                        ? AppTheme.foregroundTextStyle
+                        : AppTheme.subtitleTextStyle,
+                  ),
+                  shape: StadiumBorder(),
+                );
+              }).toList(),
+            ),
+
             // 标签
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -291,20 +325,30 @@ class _AddIdlePageState extends State<AddIdlePage> {
             RoundedButtonWidget(
               child: Icon(Icons.check, color: AppTheme.mainBackground),
               onPressed: () {
+                showDialog(
+                    context: context,
+                    builder: (context) {
+                      return new LoadingDialog();
+                    });
+
+                // Navigator.pop(context);
+
                 if (_imgBlockList.length > 1) {
                   // 跳过第一张添加图片的控件
-                  print(_preIdle.images == null);
-                  for (var i
-                      in _imgBlockList.sublist(1).cast<ImageBlockWidget>()) {
-                    _preIdle.images.add(Image(image: i.image));
+                  _preIdle.images = new List<Image>(8);
+                  int i = 0;
+                  for (var img
+                      in _imgBlockList.skip(1).cast<ImageBlockWidget>()) {
+                    _preIdle.images[i] = Image(image: img.image);
+                    i++;
                   }
                 } else {
                   showToast(" 请添加几张照片好不好呀 (*︾▽︾) ");
                   return;
                 }
 
-                if (_preIdle.title == null || _preIdle.title.isEmpty) {
-                  showToast(" 标题没有写哦 ┗( ▔, ▔ )┛");
+                if (!isValidTextInput(_preIdle.title)) {
+                  showToast(" 标题没有写哦 ┗( ▔, ▔ )┛ ");
                   return;
                 }
 
@@ -313,10 +357,18 @@ class _AddIdlePageState extends State<AddIdlePage> {
                   return;
                 }
 
-                if (_preIdle.labels.isEmpty) {
-                  showToast("添加一些标签行吗，我要分类管理的嘛 ╰(‵□′)╯");
+                if (_preIdle.category == null || _preIdle.category.isEmpty) {
+                  showToast(" 分类忘了选吗？(ﾐ´ω`ﾐ) ");
                   return;
                 }
+
+                if (_preIdle.labels.isEmpty) {
+                  showToast(" 加个标签吧，让更多人看到你 (❁´◡`❁) ");
+                  return;
+                }
+
+                _preIdle.regenerateReleaseTime();
+                myIdles.add(_preIdle);
               },
             ),
           ],
@@ -422,6 +474,39 @@ class _AddIdlePageState extends State<AddIdlePage> {
           onTap: () => Navigator.of(context).pop(),
         ),
       ],
+    );
+  }
+}
+
+class LoadingDialog extends Dialog {
+  @override
+  Widget build(BuildContext context) {
+    return new Material(
+      type: MaterialType.transparency,
+      color: Colors.transparent,
+      child: new Center(
+        child: new Container(
+          decoration: new ShapeDecoration(
+              color: Colors.white,
+              shape: new RoundedRectangleBorder(
+                  borderRadius: new BorderRadius.all(new Radius.circular(10)))),
+          width: 160,
+          height: 160,
+          padding: EdgeInsets.all(10),
+          child: new Column(
+            children: <Widget>[
+              Icon(Icons.check, size: 48.0, color: AppTheme.mainGreen),
+              Text(
+                "添加成功，快去首页看看你的宝贝吧！Y(^o^)Y ",
+                style: TextStyle(fontSize: 12, color: Colors.grey),
+                softWrap: false,
+                textAlign: TextAlign.center,
+              )
+            ],
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          ),
+        ),
+      ),
     );
   }
 }

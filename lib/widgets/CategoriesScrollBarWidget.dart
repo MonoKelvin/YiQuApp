@@ -12,11 +12,13 @@ class CategoriesScrollBarWidget extends StatefulWidget {
 
 class _CategoriesScrollBarWidgetState extends State<CategoriesScrollBarWidget> {
   int isActive = 0;
+  List _categories = categories;
 
-  // @override
-  // void initState() {
-  //   super.initState();
-  // }
+  @override
+  void initState() {
+    super.initState();
+    _categories.insert(0, "全部");
+  }
 
   /// 选择分类，自动将未选中的设置为暗色
   seleteCategory(int index) {
@@ -30,14 +32,14 @@ class _CategoriesScrollBarWidgetState extends State<CategoriesScrollBarWidget> {
       color: AppTheme.mainBackground,
       child: ListView.builder(
         scrollDirection: Axis.horizontal,
-        itemCount: categories.length,
+        itemCount: _categories.length,
         itemBuilder: (BuildContext context, int index) {
           return Column(
             children: <Widget>[
               // Icon(Icons.local_mall),
               FlatButton(
                 child: Text(
-                  categories[index],
+                  _categories[index],
                   style: AppTheme.titleTextStyle,
                 ),
                 disabledTextColor: AppTheme.activeWhenPressed,

@@ -25,7 +25,7 @@ class Idle {
 
   /// #### 商品的图像
   /// 限于 `8` 张。
-  List<Image> images = List<Image>();
+  List<Image> images = new List<Image>(8);
 
   /// #### 该商品的拥有者（发布者）
   final User _user;
@@ -37,7 +37,7 @@ class Idle {
   String description;
 
   /// #### 发布的时间
-  DateTime timeOfTheDay = DateTime.now();
+  DateTime releaseTime = DateTime.now();
 
   /// #### 所属的分类
   String category;
@@ -69,8 +69,13 @@ class Idle {
     // }
   }
 
+  DateTime regenerateReleaseTime() {
+    releaseTime = DateTime.now();
+    return releaseTime;
+  }
+
   String getMonthAndDay() {
-    String mad = timeOfTheDay.toString();
+    String mad = releaseTime.toString();
     return mad.split(" ")[0];
   }
 

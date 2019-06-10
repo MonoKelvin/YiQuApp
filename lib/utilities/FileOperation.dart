@@ -38,3 +38,21 @@ class FileOperation {
     print(jsonData.toString());
   }
 }
+
+/**
+  * #### 判断输入的文本是否有效，只针对TextFiled
+  *
+  * 返回 `true` ：有效的输入文本
+  *
+  * 返回 `false` ：无效的输入文本
+  *
+  * 判断依据：
+  *
+  *         str != null & str.isNotEmpty & str.trim() != ""
+  *
+  * str`不为空`、`有内容`、不全为 `空格` 或 `tab` 键
+  */
+bool isValidTextInput(String str) {
+  if (str == null || str.isEmpty || str.trim() == "") return false;
+  return true;
+}

@@ -5,7 +5,6 @@ import 'package:yiqu/data/User.dart';
 /// #### 所有商品的分类
 /// 下次要添加其他类别，直接在文件 `package:yiqu/data/AppConfig.dart` 中添加
 List<String> categories = [
-  '全部',
   '生活用品',
   '电子数码',
   '摆件装饰',
@@ -27,10 +26,10 @@ List<String> categories = [
 ///
 class AppTheme {
   /// 基本控件的背景色
-  static const Color widgetBackground = Color.fromRGBO(245, 245, 248, 1.0);
+  static const Color widgetBackground = Color.fromRGBO(248, 248, 252, 1.0);
 
   /// App主要的黑色
-  static const Color mainDark = Color.fromRGBO(60, 60, 68, 1.0);
+  static const Color mainDark = Color.fromRGBO(60, 60, 70, 1.0);
 
   /// App主要的蓝色
   static const Color mainBlue = Color.fromRGBO(70, 184, 255, 1.0);
@@ -48,14 +47,19 @@ class AppTheme {
   static const Color blueButtonShadow = Color.fromRGBO(70, 184, 255, 0.5);
   static const Color redShadow = Color.fromRGBO(255, 64, 106, 0.5);
   static const Color alertBackground = Color.fromRGBO(255, 64, 106, 0.1);
-  static const Color subTitle = Color.fromRGBO(120, 120, 130, 1.0);
+  static const Color subTitle = Color.fromRGBO(120, 120, 136, 1.0);
   static const Color activeWhenPressed = Color.fromRGBO(170, 170, 180, 1.0);
-  static const Color inactive = Color.fromRGBO(218, 218, 225, 1.0);
+  static const Color inactive = Color.fromRGBO(220, 220, 226, 1.0);
 
   static const TextStyle largeTitleTextStyle = TextStyle(
     fontWeight: FontWeight.bold,
     fontSize: 18.0,
     color: mainDark,
+  );
+
+  static const TextStyle foregroundTextStyle = TextStyle(
+    fontSize: 12.0,
+    color: mainBackground,
   );
 
   static const TextStyle alertTextStyle = TextStyle(
