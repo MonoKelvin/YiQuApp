@@ -4,6 +4,7 @@ import 'package:yiqu/pages/AddIdlePage.dart';
 // import 'package:yiqu/data/AppIconFont.dart';
 import 'package:yiqu/pages/HomePage.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
+import 'package:yiqu/pages/LoginPage.dart';
 import 'package:yiqu/pages/NoticesPage.dart';
 import 'package:yiqu/pages/PersonalCenterPage.dart';
 // import 'package:flutter_localizations/flutter_localizations.dart';
@@ -14,7 +15,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: AddIdlePage(),
+      home: LoginPage(),
       debugShowCheckedModeBanner: false,
       //IdleDetailsPage(idle: myIdles[0]), //MessagePage(friendUser: kimono),
       // localizationsDelegates: [

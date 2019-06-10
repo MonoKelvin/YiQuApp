@@ -9,6 +9,7 @@ import 'package:yiqu/utilities/FileOperation.dart';
 import 'package:yiqu/widgets/IconButtonWidget.dart';
 import 'package:yiqu/data/Idle.dart';
 import 'package:yiqu/widgets/ImageBlockWidget.dart';
+import 'package:yiqu/widgets/PromptWidgetDialog.dart';
 import 'package:yiqu/widgets/RoundedButtonWidget.dart';
 import 'package:yiqu/widgets/TextInputWidget.dart';
 import 'package:yiqu/widgets/TosatWidget.dart';
@@ -325,13 +326,6 @@ class _AddIdlePageState extends State<AddIdlePage> {
             RoundedButtonWidget(
               child: Icon(Icons.check, color: AppTheme.mainBackground),
               onPressed: () {
-                showDialog(
-                    context: context,
-                    builder: (context) {
-                      return new LoadingDialog();
-                    });
-
-                // Navigator.pop(context);
 
                 if (_imgBlockList.length > 1) {
                   // 跳过第一张添加图片的控件
@@ -369,6 +363,11 @@ class _AddIdlePageState extends State<AddIdlePage> {
 
                 _preIdle.regenerateReleaseTime();
                 myIdles.add(_preIdle);
+                PromptWidgetDialog.showAndWaitSecondToClose(
+                  context,
+                  contents: "添加成功，快去首页看看吧！Y(^o^)Y ",
+                  child: Icon(Icons.check, size: 54.0, color: AppTheme.mainGreen),
+                );
               },
             ),
           ],
@@ -457,7 +456,7 @@ class _AddIdlePageState extends State<AddIdlePage> {
             alignment: Alignment.center,
             padding: EdgeInsets.symmetric(horizontal: 32.0, vertical: 8.0),
             child: Text("少废话, 给我关了",
-                style: AppTheme.inactiveTextStyle.copyWith(fontSize: 12.0)),
+                style: AppTheme.titleTextStyle.copyWith(fontSize: 12.0)),
           ),
           onTap: () {
             Navigator.of(context).pop();
@@ -469,44 +468,11 @@ class _AddIdlePageState extends State<AddIdlePage> {
             alignment: Alignment.center,
             padding: EdgeInsets.symmetric(horizontal: 32.0, vertical: 8.0),
             child: Text("手抖了",
-                style: AppTheme.inactiveTextStyle.copyWith(fontSize: 12.0)),
+                style: AppTheme.titleTextStyle.copyWith(fontSize: 12.0)),
           ),
           onTap: () => Navigator.of(context).pop(),
         ),
       ],
-    );
-  }
-}
-
-class LoadingDialog extends Dialog {
-  @override
-  Widget build(BuildContext context) {
-    return new Material(
-      type: MaterialType.transparency,
-      color: Colors.transparent,
-      child: new Center(
-        child: new Container(
-          decoration: new ShapeDecoration(
-              color: Colors.white,
-              shape: new RoundedRectangleBorder(
-                  borderRadius: new BorderRadius.all(new Radius.circular(10)))),
-          width: 160,
-          height: 160,
-          padding: EdgeInsets.all(10),
-          child: new Column(
-            children: <Widget>[
-              Icon(Icons.check, size: 48.0, color: AppTheme.mainGreen),
-              Text(
-                "添加成功，快去首页看看你的宝贝吧！Y(^o^)Y ",
-                style: TextStyle(fontSize: 12, color: Colors.grey),
-                softWrap: false,
-                textAlign: TextAlign.center,
-              )
-            ],
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          ),
-        ),
-      ),
     );
   }
 }
