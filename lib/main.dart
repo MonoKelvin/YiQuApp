@@ -14,7 +14,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: YiQuApp(),
+      home: AddIdlePage(),
       debugShowCheckedModeBanner: false,
       //IdleDetailsPage(idle: myIdles[0]), //MessagePage(friendUser: kimono),
       // localizationsDelegates: [
@@ -133,7 +133,7 @@ class _YiQuAppState extends State<YiQuApp> {
           fixedColor: AppTheme.mainDark,
 
           // 未选中的 item 颜色
-          unselectedItemColor: AppTheme.unselected,
+          unselectedItemColor: AppTheme.activeWhenPressed,
 
           // 当前选中的 item，从 0 开始
           currentIndex: _currentTabIndex,

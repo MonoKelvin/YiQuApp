@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:yiqu/data/AppConfig.dart';
@@ -23,57 +24,42 @@ class _AddIdlePageState extends State<AddIdlePage> {
   String _currentLable;
   List<Widget> _imgBlockList = List<Widget>();
 
+  Container _photoAdder;
+
   @override
   void initState() {
     super.initState();
     _preIdle.labels = List();
-    _imgBlockList.add(Container(
+    _photoAdder = Container(
       width: 110.0,
       height: 110.0,
-      child: FlatButton(
-        color: AppTheme.widgetBackground,
-        onPressed: _openGallery,
-        child: Icon(Icons.add_a_photo, size: 36.0, color: AppTheme.inactive),
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8.0)),
-      ),
+      // child:
       decoration: BoxDecoration(
+        color: AppTheme.widgetBackground,
         borderRadius: BorderRadius.circular(8.0),
       ),
-    ));
+      // constraints: BoxConstraints(minHeight: 110, minWidth: 110),
+    );
+    _imgBlockList.add(_photoAdder);
   }
-
-  VoidCallback onCancel;
 
   /*拍照*/
-  _takePhoto() async {
-    var image = await ImagePicker.pickImage(source: ImageSource.camera);
+  // _takePhoto() async {
+  //   var image = await ImagePicker.pickImage(source: ImageSource.camera);
 
-    setState(() {
-      _imgPath = image;
-      if (_imgPath != null) {
-        _imgBlockList.add(Stack(
-          alignment: Alignment.topRight,
-          children: <Widget>[
-            ImageBlockWidget(
-              width: 110.0,
-              height: 110.0,
-              image: Image.file(_imgPath).image,
-            ),
-            Positioned(
-              child: IconButtonWidget(
-                iconData: Icons.cancel,
-                activeColor: AppTheme.mainGreen,
-                inactiveColor: AppTheme.mainGreen,
-                onPressed: onCancel,
-              ),
-            ),
-          ],
-        ));
-      } else {
-        showToast(" 你取消了选择图片 ");
-      }
-    });
-  }
+  //   setState(() {
+  //     _imgPath = image;
+  //     if (_imgPath != null) {
+  //       _imgBlockList.add(ImageBlockWidget(
+  //         width: 110.0,
+  //         height: 110.0,
+  //         image: Image.file(_imgPath).image,
+  //       ));
+  //     } else {
+  //       showToast(" 你取消了选择图片 ");
+  //     }
+  //   });
+  // }
 
   /*相册*/
   _openGallery() async {
@@ -85,23 +71,10 @@ class _AddIdlePageState extends State<AddIdlePage> {
     setState(() {
       _imgPath = image;
       if (_imgPath != null) {
-        _imgBlockList.add(Stack(
-          alignment: Alignment.topRight,
-          children: <Widget>[
-            ImageBlockWidget(
-              width: 110.0,
-              height: 110.0,
-              image: Image.file(_imgPath).image,
-            ),
-            Positioned(
-              child: IconButtonWidget(
-                iconData: Icons.delete,
-                activeColor: AppTheme.mainRed,
-                inactiveColor: AppTheme.mainBackground,
-                onPressed: onCancel,
-              ),
-            ),
-          ],
+        _imgBlockList.add(ImageBlockWidget(
+          width: 110.0,
+          height: 110.0,
+          image: Image.file(_imgPath).image,
         ));
       } else {
         showToast(" 你取消了选择图片 ");
@@ -137,13 +110,35 @@ class _AddIdlePageState extends State<AddIdlePage> {
                   runSpacing: 6.0,
                   children: _imgBlockList.map((imgBlock) {
                     return Builder(builder: (BuildContext context) {
-                      //var pos = _imgBlockList.indexOf(imgBlock) + 1;
-                      onCancel = () {
-                        setState(() {
-                          _imgBlockList.remove(imgBlock);
-                        });
-                      };
-                      return imgBlock;
+                      return Stack(
+                        alignment: _photoAdder != imgBlock
+                            ? Alignment.topRight
+                            : Alignment.center,
+                        children: <Widget>[
+                          imgBlock,
+                          _photoAdder != imgBlock
+                              ? Positioned(
+                                  child: IconButtonWidget(
+                                    iconData: Icons.delete,
+                                    activeColor: AppTheme.mainBackground,
+                                    inactiveColor: AppTheme.mainBackground,
+                                    onPressed: () {
+                                      setState(() {
+                                        _imgBlockList.remove(imgBlock);
+                                      });
+                                    },
+                                  ),
+                                )
+                              : Positioned(
+                                  child: IconButtonWidget(
+                                    onPressed: _openGallery,
+                                    iconData: Icons.add_a_photo,
+                                    size: 36.0,
+                                    activeColor: AppTheme.activeWhenPressed,
+                                  ),
+                                ),
+                        ],
+                      );
                     });
                   }).toList(),
                 );
@@ -157,8 +152,9 @@ class _AddIdlePageState extends State<AddIdlePage> {
               padding: EdgeInsets.symmetric(vertical: 8.0),
             ),
             TextInputWidget(
-              hintText: "不超过32个字（包括标点符号）",
+              hintText: "给你的宝贝起个名字吧！(=^ェ^=)",
               maxLength: 32,
+              onChanged: (String value) => _preIdle.title = value,
             ),
 
             // 描述
@@ -167,15 +163,16 @@ class _AddIdlePageState extends State<AddIdlePage> {
               padding: EdgeInsets.symmetric(vertical: 8.0),
             ),
             TextInputWidget(
-              hintText: "描述你的宝贝，让更多人看到 ( • ̀ω•́ )✧",
+              hintText: "描述你的宝贝，让更多人感兴趣 ( • ̀ω•́ )✧",
               maxLength: 1000,
               borderRadius: 8.0,
               maxLines: 6,
+              onChanged: (String value) => _preIdle.description = value,
             ),
 
             // 定价*
             Padding(
-              child: Text("定价", style: AppTheme.titleTextStyle),
+              child: Text("定价*", style: AppTheme.titleTextStyle),
               padding: EdgeInsets.symmetric(vertical: 8.0),
             ),
             Row(
@@ -191,7 +188,9 @@ class _AddIdlePageState extends State<AddIdlePage> {
                   child: TextInputWidget(
                     borderRadius: 50.0,
                     format: EInputFormat.Float,
-                    hintText: "出售金额",
+                    hintText: "给你的宝贝定个价 (＾＿－)",
+                    onChanged: (String value) =>
+                        _preIdle.price = double.parse(value),
                   ),
                 ),
               ],
@@ -201,17 +200,22 @@ class _AddIdlePageState extends State<AddIdlePage> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
-                Text("标签", style: AppTheme.titleTextStyle),
+                Text("标签*", style: AppTheme.titleTextStyle),
                 IconButtonWidget(
                   iconData: Icons.add_box,
                   // TODO: 添加标签
                   onPressed: () {
-                    showDialog(
-                      builder: (BuildContext context) {
-                        return _addLabelDialog();
-                      },
-                      context: context,
-                    );
+                    if (_preIdle.labels != null &&
+                        _preIdle.labels.length >= 10) {
+                      showToast("你添加的标签太多啦！(｡･｀ω´･｡)");
+                    } else {
+                      showDialog(
+                        builder: (BuildContext context) {
+                          return _addLabelDialog();
+                        },
+                        context: context,
+                      );
+                    }
                   },
                 ),
               ],
@@ -248,7 +252,7 @@ class _AddIdlePageState extends State<AddIdlePage> {
             Container(
               alignment: Alignment.center,
               child: Padding(
-                padding: EdgeInsets.only(top: 100.0, bottom: 60.0),
+                padding: EdgeInsets.only(top: 100.0, bottom: 40.0),
                 child: Text(
                   "— 我是有底线的 (*•ω•) —",
                   style: AppTheme.inactiveTextStyle.copyWith(fontSize: 12.0),
@@ -275,7 +279,7 @@ class _AddIdlePageState extends State<AddIdlePage> {
               shadowColor: AppTheme.redShadow,
               onPressed: () {
                 showDialog(
-                    barrierDismissible: false,
+                    // barrierDismissible: false,
                     context: context,
                     builder: (_) {
                       return _cancelPublishDialog();
@@ -286,7 +290,34 @@ class _AddIdlePageState extends State<AddIdlePage> {
             // TODO: 保存发布信息
             RoundedButtonWidget(
               child: Icon(Icons.check, color: AppTheme.mainBackground),
-              onPressed: () {},
+              onPressed: () {
+                if (_imgBlockList.length > 1) {
+                  // 跳过第一张添加图片的控件
+                  print(_preIdle.images == null);
+                  for (var i
+                      in _imgBlockList.sublist(1).cast<ImageBlockWidget>()) {
+                    _preIdle.images.add(Image(image: i.image));
+                  }
+                } else {
+                  showToast(" 请添加几张照片好不好呀 (*︾▽︾) ");
+                  return;
+                }
+
+                if (_preIdle.title == null || _preIdle.title.isEmpty) {
+                  showToast(" 标题没有写哦 ┗( ▔, ▔ )┛");
+                  return;
+                }
+
+                if (_preIdle.price == null || _preIdle.price.isNaN) {
+                  showToast(" 你的宝贝不要钱的吗？ (～￣▽￣)～ ");
+                  return;
+                }
+
+                if (_preIdle.labels.isEmpty) {
+                  showToast("添加一些标签行吗，我要分类管理的嘛 ╰(‵□′)╯");
+                  return;
+                }
+              },
             ),
           ],
         ),
@@ -333,8 +364,13 @@ class _AddIdlePageState extends State<AddIdlePage> {
             setState(() {
               if (_preIdle.labels == null ||
                   _currentLable == null ||
-                  _currentLable.trim() == "" ||
-                  _preIdle.labels.contains(_currentLable)) return;
+                  _currentLable.trim() == "") {
+                return;
+              }
+              if (_preIdle.labels.contains(_currentLable)) {
+                showToast("你已经添加过该标签了 (｡･ω･｡)");
+                return;
+              }
 
               _preIdle.labels.add(_currentLable);
               _currentLable = "";

@@ -51,7 +51,7 @@ class _PersonalCenterPageState extends State<PersonalCenterPage> {
                   ),
                   Text(kimono.signiture,
                       style: AppTheme.subtitleTextStyle.copyWith(
-                        color: AppTheme.unselected,
+                        color: AppTheme.activeWhenPressed,
                       )),
                   Padding(
                     padding: const EdgeInsets.all(16.0),
@@ -64,7 +64,7 @@ class _PersonalCenterPageState extends State<PersonalCenterPage> {
                         children: <Widget>[
                           Text("交易/件",
                               style: AppTheme.subtitleTextStyle.copyWith(
-                                color: AppTheme.unselected,
+                                color: AppTheme.activeWhenPressed,
                               )),
                           Text("3", style: AppTheme.bigestTextStyle),
                         ],
@@ -73,7 +73,7 @@ class _PersonalCenterPageState extends State<PersonalCenterPage> {
                         children: <Widget>[
                           Text("余额/元",
                               style: AppTheme.subtitleTextStyle.copyWith(
-                                color: AppTheme.unselected,
+                                color: AppTheme.activeWhenPressed,
                               )),
                           Text("233.66", style: AppTheme.bigestTextStyle),
                         ],
@@ -82,7 +82,7 @@ class _PersonalCenterPageState extends State<PersonalCenterPage> {
                         children: <Widget>[
                           Text("收入/元",
                               style: AppTheme.subtitleTextStyle.copyWith(
-                                color: AppTheme.unselected,
+                                color: AppTheme.activeWhenPressed,
                               )),
                           Text("67", style: AppTheme.bigestTextStyle),
                         ],
@@ -102,7 +102,7 @@ class _PersonalCenterPageState extends State<PersonalCenterPage> {
                 children: <Widget>[
                   Text("— 更多功能 —",
                       style: AppTheme.subtitleTextStyle
-                          .copyWith(color: AppTheme.unselected, height: 2.0)),
+                          .copyWith(color: AppTheme.activeWhenPressed, height: 2.0)),
                   SizedBox(height: 8.0),
                   // TODO: 完成每个功能的界面
                   Row(

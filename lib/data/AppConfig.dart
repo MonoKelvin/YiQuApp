@@ -49,7 +49,7 @@ class AppTheme {
   static const Color redShadow = Color.fromRGBO(255, 64, 106, 0.5);
   static const Color alertBackground = Color.fromRGBO(255, 64, 106, 0.1);
   static const Color subTitle = Color.fromRGBO(120, 120, 130, 1.0);
-  static const Color unselected = Color.fromRGBO(170, 170, 180, 1.0);
+  static const Color activeWhenPressed = Color.fromRGBO(170, 170, 180, 1.0);
   static const Color inactive = Color.fromRGBO(218, 218, 225, 1.0);
 
   static const TextStyle largeTitleTextStyle = TextStyle(
@@ -82,7 +82,7 @@ class AppTheme {
 
   static const TextStyle subTextStyle = TextStyle(
     fontSize: 10.0,
-    color: unselected,
+    color: activeWhenPressed,
   );
 
   static const TextStyle inactiveTextStyle = TextStyle(

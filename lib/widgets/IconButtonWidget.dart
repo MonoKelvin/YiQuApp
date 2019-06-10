@@ -17,7 +17,7 @@ class IconButtonWidget extends StatefulWidget {
     this.isActive = false,
     this.isJustClick = true,
     this.inactiveColor = AppTheme.inactive,
-    this.activeColor = AppTheme.unselected,
+    this.activeColor = AppTheme.activeWhenPressed,
     @required this.iconData,
     @required this.onPressed,
     this.padding = const EdgeInsets.all(10.0),

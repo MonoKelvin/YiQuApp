@@ -40,7 +40,7 @@ class _CategoriesScrollBarWidgetState extends State<CategoriesScrollBarWidget> {
                   categories[index],
                   style: AppTheme.titleTextStyle,
                 ),
-                disabledTextColor: AppTheme.unselected,
+                disabledTextColor: AppTheme.activeWhenPressed,
                 splashColor: AppTheme.mainBackground,
                 highlightColor: AppTheme.mainBackground,
 

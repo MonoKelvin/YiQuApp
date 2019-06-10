@@ -24,7 +24,7 @@ class Idle {
   final String uuid = Uuid().v1();
 
   /// #### 商品的图像
-  /// 限于 `9` 张。
+  /// 限于 `8` 张。
   List<Image> images = List<Image>();
 
   /// #### 该商品的拥有者（发布者）
@@ -75,12 +75,6 @@ class Idle {
   }
 
   User get getUser => _user;
-
-  /// #### 添加图片
-  /// 只允许添加 `9` 张
-  void addImage(Image img) {
-    if (images.length < 9) images.add(img);
-  }
 
   bool isExistByUuid(String otherUuid) {
     if (otherUuid == uuid) {
