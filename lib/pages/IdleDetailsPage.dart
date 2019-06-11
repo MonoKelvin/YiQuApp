@@ -29,7 +29,6 @@ class _IdleDetailsPageState extends State<IdleDetailsPage> {
 
   // @override
   // void dispose() {
-  //   // TODO: implement dispose
   //   super.dispose();
   // }
 
@@ -106,24 +105,8 @@ class _IdleDetailsPageState extends State<IdleDetailsPage> {
             ),
             Text("¥${widget.idle.price}", style: AppTheme.bigestTextStyle),
 
-            // Container(
-            //   margin: EdgeInsets.only(top: 4.0),
-            //   width: 160.0,
-            //   height: 4.0,
-            //   decoration: BoxDecoration(
-            //     color: AppTheme.mainDark,
-            //     borderRadius: BorderRadius.circular(10.0),
-            //     boxShadow: [
-            //       BoxShadow(
-            //         blurRadius: 2.0,
-            //         offset: Offset(0.0, 1.0),
-            //         color: AppTheme.mainDark.withBlue(80).withOpacity(0.8),
-            //       ),
-            //     ]
-            //   ),
-            // ),
-
             Container(
+              width: double.infinity,
               padding: const EdgeInsets.all(16.0),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -229,7 +212,7 @@ class _IdleDetailsPageState extends State<IdleDetailsPage> {
             ),
 
             Padding(
-              padding: EdgeInsets.only(top: 40.0, bottom: 40.0),
+              padding: EdgeInsets.only(top: 50.0, bottom: 40.0),
               child: Text(
                 "— 我是有底线的 (*•ω•) —",
                 style: AppTheme.inactiveTextStyle.copyWith(fontSize: 12.0),

@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:uuid/uuid.dart';
 import 'package:yiqu/data/Idle.dart';
+import 'package:yiqu/utilities/Utilities.dart';
 
 /// TODO: 需要数据库 MySQL
 /// 用户的数据
@@ -29,7 +30,10 @@ class User {
   });
 
   User.create(this._userName, this._account, this._password, this._address,
-      this.headImage, this.gender, this.signiture);
+      this.headImage, this.gender, this.signiture) {
+    if (!isValidTextInput(this.signiture))
+      this.signiture = "这个人懒死了，都没有想说的话 o(︶︿︶)o";
+  }
 
   String get getUserName => _userName;
   String get getAccount => _account;

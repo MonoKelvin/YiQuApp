@@ -58,7 +58,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     _getLoginState(context);
     return MaterialApp(
-      home: LoginPage(),
+      home: YiQuApp(),
       // ? LoginPage()
       // : YiQuApp(),
       debugShowCheckedModeBanner: false,

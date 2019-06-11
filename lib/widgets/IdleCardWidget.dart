@@ -13,8 +13,11 @@ import 'package:yiqu/widgets/TosatWidget.dart';
 
 class IdleInfoCardWidget extends StatefulWidget {
   final Idle idle;
+  final isNeedBottomWidgets;
 
-  const IdleInfoCardWidget({Key key, @required this.idle}) : super(key: key);
+  const IdleInfoCardWidget(
+      {Key key, @required this.idle, this.isNeedBottomWidgets = true})
+      : super(key: key);
 
   @override
   _IdleInfoCardWidgetState createState() => _IdleInfoCardWidgetState();
@@ -169,60 +172,67 @@ class _IdleInfoCardWidgetState extends State<IdleInfoCardWidget> {
           SizedBox(height: 8.0),
 
           // 分隔条，显示为一条线
-          Divider(height: 0.0, color: AppTheme.widgetBackground),
+          Divider(
+              height: 0.0,
+              color: widget.isNeedBottomWidgets
+                  ? AppTheme.widgetBackground
+                  : Colors.transparent),
 
           // 底部小控件
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            crossAxisAlignment: CrossAxisAlignment.center,
+          widget.isNeedBottomWidgets
+              ? Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  crossAxisAlignment: CrossAxisAlignment.center,
 
-            // Icons
-            children: <Widget>[
-              //发送消息
-              IconButtonWidget(
-                iconData: Icons.send,
-                onPressed: () {
-                  //TODO: 跳转到发送消息的界面
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (BuildContext context) =>
-                          SendMessagePage(friendUser: widget.idle.getUser),
+                  // Icons
+                  children: <Widget>[
+                    //发送消息
+                    IconButtonWidget(
+                      iconData: Icons.send,
+                      onPressed: () {
+                        //TODO: 跳转到发送消息的界面
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (BuildContext context) => SendMessagePage(
+                                friendUser: widget.idle.getUser),
+                          ),
+                        );
+                      },
                     ),
-                  );
-                },
-              ),
 
-              // 喜欢（点赞）
-              Row(
-                children: <Widget>[
-                  IconButtonWidget(
-                    iconData: Icons.thumb_up,
-                    activeColor: AppTheme.mainBlue,
-                    isActive: _isThumbUp,
-                    isJustClick: false,
-                    onPressed: () {
-                      showToast(_isThumbUp
-                          ? "  已取消点赞 o(´^｀)o  "
-                          : "  点赞成功 (*^▽^*)  ");
-                      setState(() {
-                        if (_isThumbUp) {
-                          widget.idle.satisfiedCount -= 1;
-                        } else {
-                          widget.idle.satisfiedCount += 1;
-                        }
-                        _isThumbUp = !_isThumbUp;
-                      });
-                    },
-                  ),
-                  Text(
-                    "${widget.idle.satisfiedCount}",
-                    style: AppTheme.inactiveTextStyle.copyWith(fontSize: 16.0),
-                  ),
-                ],
-              ),
-            ],
-          ),
+                    // 喜欢（点赞）
+                    Row(
+                      children: <Widget>[
+                        IconButtonWidget(
+                          iconData: Icons.thumb_up,
+                          activeColor: AppTheme.mainBlue,
+                          isActive: _isThumbUp,
+                          isJustClick: false,
+                          onPressed: () {
+                            showToast(_isThumbUp
+                                ? "  已取消点赞 o(´^｀)o  "
+                                : "  点赞成功 (*^▽^*)  ");
+                            setState(() {
+                              if (_isThumbUp) {
+                                widget.idle.satisfiedCount -= 1;
+                              } else {
+                                widget.idle.satisfiedCount += 1;
+                              }
+                              _isThumbUp = !_isThumbUp;
+                            });
+                          },
+                        ),
+                        Text(
+                          "${widget.idle.satisfiedCount}",
+                          style: AppTheme.inactiveTextStyle
+                              .copyWith(fontSize: 16.0),
+                        ),
+                      ],
+                    ),
+                  ],
+                )
+              : Container(height: 4.0),
         ],
       ),
 

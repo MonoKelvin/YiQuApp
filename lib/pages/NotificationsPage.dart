@@ -43,37 +43,39 @@ class _NotificationsPageState extends State<NotificationsPage> {
                         content: Text("清空之后你们之间\n就没有小秘密了呀！￣ω￣=",
                             textAlign: TextAlign.center,
                             style: AppTheme.alertTextStyle),
+                            contentPadding: EdgeInsets.symmetric(vertical: 16.0),
                         backgroundColor: AppTheme.mainBackground,
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(8.0)),
                         elevation: 0.0,
                         actions: <Widget>[
-                          GestureDetector(
-                            child: Container(
-                              alignment: Alignment.center,
-                              padding: EdgeInsets.symmetric(
-                                  horizontal: 32.0, vertical: 8.0),
-                              child: Text("清空吧，感觉不会再爱了",
-                                  style: AppTheme.titleTextStyle
-                                      .copyWith(fontSize: 12.0)),
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: GestureDetector(
+                              child: Text("清空吧 (￣へ￣)",
+                                  style:
+                                      AppTheme.subtitleTextStyle.copyWith(
+                                    color: AppTheme.inactive,
+                                  )),
+                              onTap: () {
+                                setState(() {
+                                  AppData.messagesList[_users[index]]
+                                      .clear();
+                                });
+                                Navigator.of(context).pop();
+                              },
                             ),
-                            onTap: () {
-                              setState(() {
-                                AppData.messagesList[_users[index]].clear();
-                              });
-                              Navigator.of(context).pop();
-                            },
                           ),
-                          GestureDetector(
-                            child: Container(
-                              alignment: Alignment.center,
-                              padding: EdgeInsets.symmetric(
-                                  horizontal: 32.0, vertical: 8.0),
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: GestureDetector(
                               child: Text("手抖了",
-                                  style: AppTheme.titleTextStyle
-                                      .copyWith(fontSize: 12.0)),
+                                  style:
+                                      AppTheme.subtitleTextStyle.copyWith(
+                                    color: AppTheme.inactive,
+                                  )),
+                              onTap: () => Navigator.of(context).pop(),
                             ),
-                            onTap: () => Navigator.of(context).pop(),
                           ),
                         ],
                       );

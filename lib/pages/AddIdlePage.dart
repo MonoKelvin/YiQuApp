@@ -446,30 +446,33 @@ class _AddIdlePageState extends State<AddIdlePage> {
         textAlign: TextAlign.center,
         style: AppTheme.alertTextStyle,
       ),
+      contentPadding: EdgeInsets.symmetric(vertical: 16.0),
       backgroundColor: AppTheme.mainBackground,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8.0)),
       elevation: 0.0,
       actions: <Widget>[
-        GestureDetector(
-          child: Container(
-            alignment: Alignment.center,
-            padding: EdgeInsets.symmetric(horizontal: 32.0, vertical: 8.0),
+        Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: GestureDetector(
             child: Text("少废话, 给我关了",
-                style: AppTheme.titleTextStyle.copyWith(fontSize: 12.0)),
+                style: AppTheme.subtitleTextStyle.copyWith(
+                  color: AppTheme.inactive,
+                )),
+            onTap: () {
+              Navigator.of(context).pop();
+              Navigator.of(context).pop();
+            },
           ),
-          onTap: () {
-            Navigator.of(context).pop();
-            Navigator.of(context).pop();
-          },
         ),
-        GestureDetector(
-          child: Container(
-            alignment: Alignment.center,
-            padding: EdgeInsets.symmetric(horizontal: 32.0, vertical: 8.0),
+        Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: GestureDetector(
             child: Text("手抖了",
-                style: AppTheme.titleTextStyle.copyWith(fontSize: 12.0)),
+                style: AppTheme.subtitleTextStyle.copyWith(
+                  color: AppTheme.inactive,
+                )),
+            onTap: () => Navigator.of(context).pop(),
           ),
-          onTap: () => Navigator.of(context).pop(),
         ),
       ],
     );
