@@ -1,0 +1,12 @@
+﻿{
+    "uuid": "9a2cb6a2-8c27-11e9-a25a-0235d2b38928",
+    "userName": "柳然是魔鬼", 
+    "account": "asdqwe",   
+    "password": "123456", 
+    "address": "安徽省宣城市宣州区合肥工业大学", 
+    "headImage": "https://img2.woyaogexing.com/2019/06/11/ad15fa0b971e2fa5!400x400_big.jpg", 
+    "gender": "女",  
+    "signiture": ""  
+}
+
+

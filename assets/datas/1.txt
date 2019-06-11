@@ -1,0 +1,12 @@
+﻿{
+    "uuid": "9a2cb6ab-8c27-11e9-a25a-0235d2b38928",
+    "userName": "目色三", 
+    "account": "asd79211",   
+    "password": "password", 
+    "address": "安徽省合肥市合肥工业大学屯溪路校区", 
+    "headImage": "https://img2.woyaogexing.com/2019/06/11/c3d150ab802641eb8ff07b0eeda83b07!400x400.jpeg", 
+    "gender": "男",  
+    "signiture": ""  
+}
+
+

@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:yiqu/data/AppConfig.dart';
@@ -5,7 +6,7 @@ import 'package:yiqu/data/AppConfig.dart';
 import 'package:yiqu/pages/HomePage.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:yiqu/pages/LoginPage.dart';
-import 'package:yiqu/pages/NoticesPage.dart';
+import 'package:yiqu/pages/NotificationsPage.dart';
 import 'package:yiqu/pages/PersonalCenterPage.dart';
 
 import 'data/User.dart';
@@ -14,23 +15,39 @@ import 'data/User.dart';
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
-  _getLoginState() async {
+  _getLoginState(BuildContext context) async {
     try {
       myself = User(
           headImage: Image.network(
-        "https://cdn.pixabay.com/photo/2016/04/10/21/34/woman-1320810_960_720.jpg",
+        "https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=279773838,3734855380&fm=26&gp=0.jpg",
         fit: BoxFit.cover,
       ));
       myself.setUserName = "托尼史塔克";
-      myself.setAccount = "15007083506@qq.com";
-      myself.setPassword = "WarMachineCoolX";
+      myself.setAccount = "15007083506";
+      myself.setPassword = "111111";
       myself.setAddress = "合肥工业大学宣城校区三号宿舍楼";
-      myself.gender = "合肥工业大学宣城校区三号宿舍楼";
+      myself.gender = "男";
       myself.signiture = "I am Iron Man";
-      myself.freshToJsonFile("user.json");
 
-      myself = await User.getDataFromJson("user.json");
+      friend = User(
+          headImage: Image.network(
+        "https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=4241417337,1057509416&fm=26&gp=0.jpg",
+        fit: BoxFit.cover,
+      ));
+      friend.setUserName = "美国队长";
+      friend.setAccount = "15007083506";
+      friend.setPassword = "222222";
+      friend.setAddress = "合肥工业大学宣城校区三号宿舍楼";
+      friend.gender = "男";
+      friend.signiture = "I can do this all day!";
+      // myself.freshToJsonFile("user.json");
 
+      // myself = await User.getDataFromJson("user.json");
+      // DefaultAssetBundle.of(context)
+      //     .loadString("assets/datas/user.json")
+      //     .then((String value) {
+      //   myself = User.fromJson(json.decode(value));
+      // });
     } catch (err) {
       print(err);
       exit(255);
@@ -39,21 +56,12 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    _getLoginState();
+    _getLoginState(context);
     return MaterialApp(
-      home: myself.getUuid == null?LoginPage():YiQuApp(),
+      home: YiQuApp(),//LoginPage(),
+          // ? LoginPage()
+          // : YiQuApp(),
       debugShowCheckedModeBanner: false,
-      //IdleDetailsPage(idle: myIdles[0]), //MessagePage(friendUser: kimono),
-      // localizationsDelegates: [
-      //   //此处
-      //   GlobalMaterialLocalizations.delegate,
-      //   GlobalWidgetsLocalizations.delegate,
-      // ],
-      // supportedLocales: [
-      //   //此处
-      //   const Locale('zh', 'CH'),
-      //   const Locale('en', 'US'),
-      // ],
       theme: Theme.of(context).copyWith(
           // buttonColor: AppTheme.mainDark,
           // cardColor: AppTheme.mainBackground,
@@ -115,7 +123,7 @@ class _YiQuAppState extends State<YiQuApp> {
       HomePage(),
       // CommunityPage(),
       // MessagePage(),
-      NoticesPage(),
+      NotificationsPage(),
       PersonalCenterPage(),
     ];
   }
@@ -186,7 +194,7 @@ class _YiQuAppState extends State<YiQuApp> {
             // 消息与聊天
             BottomNavigationBarItem(
               icon: Icon(Icons.message),
-              title: Text("消息"),
+              title: Text("消息列表"),
             ),
 
             // 物品管理

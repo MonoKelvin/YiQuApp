@@ -1,0 +1,126 @@
+﻿
+
+Idle(
+    myself,                     
+    title: "洗发水",               
+    category: categories[0],    
+    labels: [                   
+      "日用品",
+      "生活用品"
+    ],
+    price: 20.00,              
+    idleType: EIdleType.Sell,   
+    description: "洗发水买多了，低价出售",         
+    images: [                   
+      Image.network(
+        "http://cdimg.good.cc/images/MainImg/0x0/0/4352/4352815.jpg_w300.jpg?r=519202721",                  
+        fit: BoxFit.cover,      //图片缩放类型，不要改
+      ),
+     
+    ],
+),
+
+Idle(
+    myself,                     
+    title: "单反相机",               
+    category: categories[1],    
+    labels: [                   
+      "照相机",
+      "数码产品"
+    ],
+    price: 3999.00,              
+    idleType: EIdleType.Sell,   
+    description: "全新单反，低价出售",         
+    images: [                   
+      Image.network(
+        "http://img003.hc360.cn/g8/M08/AC/0C/wKhQtVNHdMOETKdCAAAAAJu1adg112.jpg",                  
+        fit: BoxFit.cover,      
+      ),
+     
+    ],
+),
+
+Idle(
+    myself,                     
+    title: "混沌摆",               
+    category: categories[2],    
+    labels: [                   
+      "摆件装饰",
+      "趣物"
+    ],
+    price: 200.00,              
+    idleType: EIdleType.Sell,   
+    description: "这个没什么用，有想要的直接拿走",         
+    images: [                   
+      Image.network(
+        "http://img.go007.com/2017/12/11/5606d0916d1b626f_0.jpg",                  
+        fit: BoxFit.cover,      
+      ),
+     
+    ],
+),
+
+Idle(
+    myself,                     
+    title: "人性的弱点",               
+    category: categories[3],    
+    labels: [                   
+      "书籍",
+      "读物"
+    ],
+    price: 10.00,              
+    idleType: EIdleType.Sell,   
+    description: "读完了，九成新，有意者联系",         
+    images: [                   
+      Image.network(
+        "http://m.360buyimg.com/n12/18270/735ea0e2-0dcd-4e1a-bbcd-d3320ec1e3cc.jpg%21q70.jpg",                  
+        fit: BoxFit.cover,      
+      ),
+     
+    ],
+),
+
+Idle(
+    myself,                     
+    title: "跳绳",               
+    category: categories[4],    
+    labels: [                   
+      "运动用品",
+      "体育用品"
+    ],
+    price: 2.00,              
+    idleType: EIdleType.Sell,   
+    description: "不想要了，速度出了",         
+    images: [                   
+      Image.network(
+        "http://img005.hc360.cn/g7/M05/51/8D/wKhQtFQB2aiEHzFzAAAAAOr1YFM617.jpg",                  
+        fit: BoxFit.cover,      
+      ),
+     
+    ],
+),
+
+Idle(
+    myself,                     
+    title: "握力器",               
+    category: categories[5],    
+    labels: [                   
+      "运动用品",
+      "体育用品"
+    ],
+    price: 20.00,              
+    idleType: EIdleType.Sell,   
+    description: "不想要了，速度出了",         
+    images: [                   
+      Image.network(
+        "http://fs1.shop123.com.tw/300135/upload/product/3001354112pic_outside_969679.jpg",                  
+        fit: BoxFit.cover,      
+      ),
+     
+    ],
+),
+
+
+
+
+

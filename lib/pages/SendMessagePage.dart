@@ -4,20 +4,19 @@ import 'package:yiqu/data/AppConfig.dart';
 import 'package:yiqu/data/User.dart';
 import 'package:yiqu/pages/PersonalCenterPage.dart';
 import 'package:yiqu/widgets/ImageBlockWidget.dart';
-import 'package:intl/intl.dart';
 
-/// 聊天主页面 MessagePage 控件定义为一个有状态控件
-class MessagePage extends StatefulWidget {
+/// 发送聊天主页面 SendMessagePage 控件定义为一个有状态控件
+class SendMessagePage extends StatefulWidget {
   final User friendUser;
 
-  const MessagePage({Key key, this.friendUser}) : super(key: key);
+  const SendMessagePage({Key key, this.friendUser}) : super(key: key);
 
   @override
-  State createState() => MessagePageState();
+  State createState() => SendMessagePageState();
 }
 
 /// MessagePageState 状态中实现聊天内容的动态更新
-class MessagePageState extends State<MessagePage>
+class SendMessagePageState extends State<SendMessagePage>
     with TickerProviderStateMixin {
   final List<ChatMessage> _messages = <ChatMessage>[];
 
@@ -27,20 +26,44 @@ class MessagePageState extends State<MessagePage>
   /// 到 MessagePageState 对象中定义一个标志位
   bool _isComposing = false;
 
+  @override
+  void initState() {
+    super.initState();
+    if (AppData.messagesList[widget.friendUser] == null) {
+      AppData.messagesList[widget.friendUser] = [];
+    }
+    AppData.messagesList[widget.friendUser].forEach((_msg) {
+      if (_msg == null) return;
+      _sendMessage(
+        _msg.contents,
+        isme: _msg.isMe,
+        time: _msg.time,
+        isNewMessage: false,
+      );
+    });
+    Future.delayed(Duration(milliseconds: 500),
+        () => _sendMessage("来了，老弟！😋", isme: false));
+  }
+
   /// 定义发送文本事件的处理函数
-  void _handleSubmitted(String text) {
+  void _sendMessage(String text,
+      {bool isme = true, String time, bool isNewMessage = true}) {
+    if (text == null || text.isEmpty) return;
     _textController.clear();
     setState(() {
       _isComposing = false; // 重置 _isComposing 值
     });
 
-    DateTime time = DateTime.now();
+    if (time == null || time.isEmpty) {
+      time = DateTime.now().toString().substring(5, 19);
+    }
 
     ChatMessage message = ChatMessage(
-      myself,
+      isme ? myself : widget.friendUser,
       text: text,
-      isMe: true,
-      time: time.toString().substring(5, 19),
+      isMe: isme,
+      time: time,
+      isNeedAnimation: isNewMessage,
       animationController: AnimationController(
         duration: Duration(milliseconds: 700),
         vsync: this,
@@ -50,6 +73,16 @@ class MessagePageState extends State<MessagePage>
       _messages.insert(0, message);
     });
     message.animationController.forward();
+    // if (AppData.messagesList[widget.friendUser] == null) {
+    //   AppData.messagesList[widget.friendUser] = [];
+    // }
+    if (isNewMessage) {
+      AppData.messagesList[widget.friendUser].add(Message(
+        contents: text,
+        isMe: isme,
+        time: time,
+      ));
+    }
   }
 
   //定义文本输入框控件
@@ -75,7 +108,7 @@ class MessagePageState extends State<MessagePage>
                     }
                   });
                 },
-                onSubmitted: _handleSubmitted,
+                onSubmitted: _sendMessage,
                 decoration: InputDecoration.collapsed(
                   hintText: "发送一条消息吧(｡･ω･｡)",
                 ),
@@ -85,7 +118,7 @@ class MessagePageState extends State<MessagePage>
               child: IconButton(
                 icon: Icon(Icons.send),
                 onPressed: _isComposing
-                    ? () => _handleSubmitted(_textController.text)
+                    ? () => _sendMessage(_textController.text)
                     : null,
               ),
             ),
@@ -111,7 +144,6 @@ class MessagePageState extends State<MessagePage>
         Flexible(
           //子控件可柔性填充，如果下方弹出输入框，使消息记录列表可适当缩小高度
           child: ListView.builder(
-            //可滚动显示的消息列表
             reverse: true, //反转排序，列表信息从下至上排列
             itemBuilder: (_, int index) => _messages[index], //插入聊天信息控件
             itemCount: _messages.length,
@@ -127,9 +159,9 @@ class MessagePageState extends State<MessagePage>
             ),
             boxShadow: [
               BoxShadow(
-                blurRadius: 20.0,
-                offset: Offset(0.0, -10.0),
-                color: AppTheme.blueCardShadow,
+                blurRadius: 16.0,
+                offset: Offset(0.0, -8.0),
+                color: AppTheme.blueCardShadow.withOpacity(0.3),
               ),
             ],
           ),
@@ -147,12 +179,16 @@ class ChatMessage extends StatelessWidget {
   final String time;
   final AnimationController animationController;
   final bool isMe;
+  final bool isNeedAnimation;
 
-  ChatMessage(this._user,
-      {this.text,
-      this.time,
-      this.animationController,
-      this.isMe = true}); //加入动画控制器对象
+  ChatMessage(
+    this._user, {
+    this.text,
+    this.time,
+    this.animationController,
+    this.isMe = true,
+    this.isNeedAnimation = true,
+  }); //加入动画控制器对象
 
   @override
   Widget build(BuildContext context) {
@@ -265,13 +301,16 @@ class ChatMessage extends StatelessWidget {
         ),
       );
     }
-    return SizeTransition(
-        // 用 SizeTransition 动效控件包裹整个控件，定义从小变大的动画效果
-        sizeFactor: CurvedAnimation(
-          parent: animationController,
-          curve: Curves.easeInOutQuint,
-        ), // 指定曲线类型
-        axisAlignment: 0.0, // 对齐
-        child: msgWidget);
+    return isNeedAnimation
+        ? SizeTransition(
+            // 用 SizeTransition 动效控件包裹整个控件，定义从小变大的动画效果
+            sizeFactor: CurvedAnimation(
+              parent: animationController,
+              curve: Curves.easeInOutQuint,
+            ), // 指定曲线类型
+            axisAlignment: 0.0, // 对齐
+            child: msgWidget,
+          )
+        : msgWidget;
   }
 }

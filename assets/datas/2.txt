@@ -1,0 +1,12 @@
+﻿{
+    "uuid": "9a2cb6ab-8c27-11e9-a25a-0235d2b38928",
+    "userName": "天才小熊猫",  
+    "account": "asd792a",   
+    "password": "passwor",  
+    "address": "
+    "headImage": "https://img2.woyaogexing.com/2019/06/11/7485a48307e736df!400x400_big.jpg", 
+    "gender": "男",     
+    "signiture": "" 
+}
+
+

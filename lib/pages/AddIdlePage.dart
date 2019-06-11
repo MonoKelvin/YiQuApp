@@ -29,7 +29,7 @@ class _AddIdlePageState extends State<AddIdlePage> {
   @override
   void initState() {
     super.initState();
-    _preIdle.labels = List();
+    _preIdle.labels = [];
     _photoAdder = Container(
       width: 110.0,
       height: 110.0,
@@ -327,7 +327,7 @@ class _AddIdlePageState extends State<AddIdlePage> {
 
                 if (_imgBlockList.length > 1) {
                   // 跳过第一张添加图片的控件
-                  _preIdle.images = new List<Image>(8);
+                  _preIdle.images = [];
                   int i = 0;
                   for (var img
                       in _imgBlockList.skip(1).cast<ImageBlockWidget>()) {
@@ -360,7 +360,7 @@ class _AddIdlePageState extends State<AddIdlePage> {
                 }
 
                 _preIdle.regenerateReleaseTime();
-                myIdles.add(_preIdle);
+                myIdles.insert(0, _preIdle);
                 PromptWidgetDialog.showAndWaitSecondToClose(
                   context,
                   contents: "添加成功，快去首页看看吧！Y(^o^)Y ",

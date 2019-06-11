@@ -22,7 +22,7 @@ class _CategoriesScrollBarWidgetState extends State<CategoriesScrollBarWidget> {
 
   /// 选择分类，自动将未选中的设置为暗色
   seleteCategory(int index) {
-    if (index < categories.length) {}
+    if (index < _categories.length) {}
   }
 
   @override

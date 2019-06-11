@@ -2,7 +2,6 @@ import 'package:uuid/uuid.dart';
 // import 'package:intl/intl.dart';
 import 'package:flutter/material.dart';
 import 'package:yiqu/data/User.dart';
-import 'package:yiqu/data/AppConfig.dart';
 
 /// 商品的交易类型
 enum EIdleType {
@@ -25,7 +24,7 @@ class Idle {
 
   /// #### 商品的图像
   /// 限于 `8` 张。
-  List<Image> images = new List<Image>(8);
+  List<Image> images = [];
 
   /// #### 该商品的拥有者（发布者）
   final User _user;
@@ -52,7 +51,7 @@ class Idle {
   //点赞（满意）数量
   int satisfiedCount = 0;
 
-  List<String> labels = new List<String>();
+  List<String> labels = [];
 
   Idle(
     this._user, {

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:yiqu/data/Idle.dart';
 import 'package:yiqu/data/User.dart';
+import 'package:yiqu/pages/SendMessagePage.dart';
 
 /// #### 所有商品的分类
 /// 下次要添加其他类别，直接在文件 `package:yiqu/data/AppConfig.dart` 中添加
@@ -115,31 +116,17 @@ class AppTheme {
   );
 }
 
-// {
-//     "uuid":"",
-//     "userName": "托尼史塔克",
-//     "account": "15007083506@qq.com",
-//     "password": "WarMachineCoolX",
-//     "address": "合肥工业大学宣城校区三号宿舍楼",
-//     "headImage": "assets/images/girl_for_user.png",
-//     "gender": "男",
-//     "signiture": "I am Iron Man!"
-// }
-
 User myself = new User();
+User friend = new User();
 
 // TODO: 不应该直接给出，应要动态创建内容
 /// #### 我的所有商品
 List<Idle> myIdles = [
   Idle(
-    myself,
+    AppData.allUsers[0],
     title: "魅族EP51蓝牙耳机",
     category: categories[2],
-    labels: [
-      categories[2],
-      "耳机",
-      "魅族"
-    ],
+    labels: ["耳机", "魅族"],
     price: 99.00,
     idleType: EIdleType.Sell,
     description: "本想运动时戴，可惜懒癌附体，一年下来也没动过，耳机几乎放着吃灰。",
@@ -159,14 +146,10 @@ List<Idle> myIdles = [
     ],
   ),
   Idle(
-    myself,
+    AppData.allUsers[1],
     title: "YSL方管小金条21圣罗兰杨树林口红",
     category: categories[3],
-    labels: [
-      categories[3],
-      "口红",
-      "化妆品"
-    ],
+    labels: ["口红", "化妆品"],
     price: 149.00,
     idleType: EIdleType.Change,
     description: "品牌型号:圣罗兰新旧程度:全新转手原因:朋友给带的口红不太适合自己，送给有缘人",
@@ -178,15 +161,10 @@ List<Idle> myIdles = [
     ],
   ),
   Idle(
-    myself,
+    AppData.allUsers[2],
     title: "铁艺服装架服装店衣架展示架落地式女装店陈列中岛架",
     category: categories[3],
-    labels: [
-      categories[3],
-      "衣架",
-      "女装",
-      "装饰"
-    ],
+    labels: ["衣架", "女装", "装饰"],
     price: 104.65,
     idleType: EIdleType.Sell,
     description: "颜色分类F款【长55】",
@@ -198,14 +176,10 @@ List<Idle> myIdles = [
     ],
   ),
   Idle(
-    myself,
+    AppData.allUsers[3],
     title: "ysl唇釉12",
     category: categories[3],
-    labels: [
-      categories[3],
-      "化妆品",
-      "口红"
-    ],
+    labels: ["化妆品", "口红"],
     price: 150.00,
     idleType: EIdleType.Sell,
     description: "圣罗兰金管唇釉12 自用正品 掉漆 余量如图 可以买回去试色用 价格可商量",
@@ -217,14 +191,10 @@ List<Idle> myIdles = [
     ],
   ),
   Idle(
-    myself,
+    friend,
     title: "施华洛世奇项链",
     category: categories[1],
-    labels: [
-      categories[1],
-      "项链",
-      "首饰"
-    ],
+    labels: ["项链", "首饰"],
     price: 200.00,
     idleType: EIdleType.Sell,
     description: "去年八月中旬月份买的，因为脖子粗了，待着不好看。有喜欢的宝宝，可以看一下保证正品小天鹅",
@@ -236,3 +206,67 @@ List<Idle> myIdles = [
     ],
   ),
 ];
+
+class Message {
+  bool isMe;
+  String contents;
+  String time;
+
+  Message({@required this.isMe, @required this.contents, @required this.time});
+}
+
+class AppData {
+  static Map<User, List<Message>> messagesList = ({});
+  //Map<User, List<ChatMessage>>;
+
+  static List<User> allUsers = [
+    User.create(
+      "天才小熊猫",
+      "asd792a",
+      "passwor",
+      "",
+      Image.network(
+        "https://img2.woyaogexing.com/2019/06/11/7485a48307e736df!400x400_big.jpg",
+        fit: BoxFit.cover,
+      ),
+      "男",
+      "",
+    ),
+    User.create(
+      "目色三",
+      "asd79211",
+      "password",
+      "安徽省合肥市合肥工业大学屯溪路校区",
+      Image.network(
+        "https://img2.woyaogexing.com/2019/06/11/c3d150ab802641eb8ff07b0eeda83b07!400x400.jpeg",
+        fit: BoxFit.cover,
+      ),
+      "男",
+      "",
+    ),
+    User.create(
+      "柳然是魔鬼",
+      "asdqwe",
+      "123456",
+      "安徽省宣城市宣州区合肥工业大学",
+      Image.network(
+        "https://img2.woyaogexing.com/2019/06/11/ad15fa0b971e2fa5!400x400_big.jpg",
+        fit: BoxFit.cover,
+      ),
+      "女",
+      "",
+    ),
+    User.create(
+      "美国队长",
+      "15007083506",
+      "222222",
+      "合肥工业大学宣城校区三号宿舍楼",
+      Image.network(
+        "https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=4241417337,1057509416&fm=26&gp=0.jpg",
+        fit: BoxFit.cover,
+      ),
+      "男",
+      "I can do this all day!",
+    ),
+  ];
+}

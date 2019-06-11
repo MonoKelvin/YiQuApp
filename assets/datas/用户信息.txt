@@ -1,0 +1,48 @@
+﻿
+
+
+
+{
+    "uuid": "db88f475-8c2c-11e9-a25a-0235d2b38928",
+    "userName": "XRDS0909",  
+    "account": "89745@qq.com",   
+    "password": "123123", 
+    "address": "合肥工业大学三号宿舍419",   
+    "headImage": "https://ss0.bdstatic.com/94oJfD_bAAcT8t7mm9GUKT-xh_/timg?image&quality=100&size=b4000_4000&sec=1560246423&di=93c25b0dd009eea3973d0e123678db88&src=http://img3.duitang.com/uploads/item/201605/07/20160507191419_J2m8R.thumb.700_0.jpeg", 
+    "gender": "男",     
+    "signiture": "走自己的路，让别人说去吧"  
+}
+
+{
+    "uuid": "db88f474-8c2c-11e9-a25a-0235d2b38928",
+    "userName": "asd8976",  
+    "account": "4302@163.com",   
+    "password": "123123", 
+    "address": "合肥工业大学四号宿舍420",   
+    "headImage": "https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=3702304829,2844936810&fm=26&gp=0.jpg", 
+    "gender": "男",     
+    "signiture": ""  
+}
+
+{
+    "uuid": "db88f473-8c2c-11e9-a25a-0235d2b38928",
+    "userName": "我是大美女",  
+    "account": "meinv@qq.com",   
+    "password": "123123", 
+    "address": "合肥工业大学二号宿舍320",   
+    "headImage": "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1560256990622&di=34023eb24787f60822e52308a0abf456&imgtype=0&src=http%3A%2F%2Fhbimg.b0.upaiyun.com%2F0338cbe93580d5e6b0e89f25531541d455f66fda4a6a5-eVWQaf_fw658", 
+    "gender": "女",     
+    "signiture": "我是大**"  
+}
+
+{
+    "uuid": "db88f472-8c2c-11e9-a25a-0235d2b38928",
+    "userName": "555",  
+    "account": "555@qq.com",   
+    "password": "123123", 
+    "address": "合肥工业大学三号宿舍220",   
+    "headImage": "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1560257167339&di=1380f25917831284ee316f92a901e4b9&imgtype=0&src=http%3A%2F%2Fpic166.nipic.com%2Ffile%2F20180527%2F11949215_140246196000_2.jpg", 
+    "gender": "男",     
+    "signiture": "我是大**"  
+}
+

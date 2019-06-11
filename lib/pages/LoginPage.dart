@@ -1,8 +1,8 @@
-import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:yiqu/data/AppConfig.dart';
 import 'package:yiqu/data/User.dart';
+import 'package:yiqu/main.dart';
 import 'package:yiqu/pages/HomePage.dart';
 import 'package:yiqu/widgets/PromptWidgetDialog.dart';
 import 'package:yiqu/widgets/TextInputWidget.dart';
@@ -16,12 +16,12 @@ class _LoginPageState extends State<LoginPage>
     with SingleTickerProviderStateMixin {
   final _loginFormKey = GlobalKey<FormState>();
   String _account, _password;
-  bool _loginFailed;
+  bool _loginSuccessfully;
 
   @override
   void initState() {
     super.initState();
-    _loginFailed = false;
+    _loginSuccessfully = false;
   }
 
   void submitLoginForm() {
@@ -29,24 +29,31 @@ class _LoginPageState extends State<LoginPage>
     if (_loginFormKey.currentState.validate()) {
       _loginFormKey.currentState.save();
       // TODO:提交给数据库验证
-      if (_account == myself.getAccount && _password == myself.getPassword) {
-        _loginFailed = true;
+      print("$_account  $_password");
+      if ((_account == myself.getAccount && _password == myself.getPassword) ||
+          (_account == friend.getAccount && _password == friend.getPassword)) {
+        _loginSuccessfully = true;
+      } else {
+        _loginSuccessfully = false;
       }
+
       showDialog(
           context: context,
           builder: (context) {
             return PromptWidgetDialog(
-              contents: _loginFailed ? "账号或密码错误\n请重新登录!" : "正在登录验证\n请稍等...",
-              child: _loginFailed
-                  ? Icon(Icons.close, size: 54.0, color: AppTheme.mainRed)
-                  : CircularProgressIndicator(),
-            );
+                contents:
+                    _loginSuccessfully ? "正在登录验证\n请稍等..." : "账号或密码错误\n请重新登录!",
+                child: _loginSuccessfully
+                    ? CircularProgressIndicator()
+                    : Icon(Icons.close, size: 54.0, color: AppTheme.mainRed));
           });
       Future.delayed(Duration(milliseconds: 2000), () {
         Navigator.pop(context);
-        Navigator.of(context).pushReplacement(MaterialPageRoute(
-          builder: (_) => HomePage(),
-        ));
+        if (_loginSuccessfully) {
+          Navigator.of(context).pushReplacement(MaterialPageRoute(
+            builder: (_) => YiQuApp(),
+          ));
+        }
       });
     } else {
       // Scaffold.of(context).showSnackBar(SnackBar(
@@ -88,6 +95,9 @@ class _LoginPageState extends State<LoginPage>
                       maxLength: 22,
                       icon:
                           Icon(Icons.account_circle, color: AppTheme.inactive),
+                      onChanged: (String str) {
+                        _account = str;
+                      },
                     ),
 
                     // 间隔
@@ -100,6 +110,9 @@ class _LoginPageState extends State<LoginPage>
                       errorText: "密码不能为空",
                       maxLength: 16,
                       format: EInputFormat.Passward,
+                      onChanged: (String str) {
+                        _password = str;
+                      },
                     ),
 
                     // 注册新用户和忘记密码

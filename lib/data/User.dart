@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:uuid/uuid.dart';
 import 'package:yiqu/data/Idle.dart';
 
@@ -27,6 +28,9 @@ class User {
     this.signiture = "这个人懒死了，都没有想说的话 o(︶︿︶)o",
   });
 
+  User.create(this._userName, this._account, this._password, this._address,
+      this.headImage, this.gender, this.signiture);
+
   String get getUserName => _userName;
   String get getAccount => _account;
   String get getPassword => _password;
@@ -38,7 +42,10 @@ class User {
   set setPassword(String password) => _password = password;
   set setAddress(String address) => _address = address;
 
-  static final User boyUser = User();
+  static final User boyUser = User(
+      headImage: Image(
+    image: AssetImage("assets/images/boy_for_user.png"),
+  ));
 
   static final User girlUser = User(
     headImage: Image(image: AssetImage("assets/images/girl_for_user.png")),
@@ -50,7 +57,7 @@ class User {
     _account = json['account'];
     _password = json['password'];
     _address = json['address'];
-    headImage = Image.file(File(json['headImage']));
+    headImage = Image.network(json['headImage']);
     gender = json['gender'];
     signiture = json['signiture'];
   }
@@ -75,7 +82,8 @@ class User {
   ///
   /// 不要写成 `datas/user.jon`
   static Future<User> getDataFromJson(String fileName) async {
-    var str = await File("assets/datas/$fileName").readAsString();
+    var str = rootBundle.loadString("assets/datas/$fileName").toString();
+    //var str = await File("assets/datas/$fileName").readAsString();
     var user = User.fromJson(json.decode(str));
     return user;
   }

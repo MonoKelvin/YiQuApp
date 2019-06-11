@@ -66,7 +66,7 @@ class _PersonalCenterPageState extends State<PersonalCenterPage> {
                               style: AppTheme.subtitleTextStyle.copyWith(
                                 color: AppTheme.activeWhenPressed,
                               )),
-                          Text("3", style: AppTheme.bigestTextStyle),
+                          Text("0", style: AppTheme.bigestTextStyle),
                         ],
                       ),
                       Column(
@@ -75,7 +75,7 @@ class _PersonalCenterPageState extends State<PersonalCenterPage> {
                               style: AppTheme.subtitleTextStyle.copyWith(
                                 color: AppTheme.activeWhenPressed,
                               )),
-                          Text("233.66", style: AppTheme.bigestTextStyle),
+                          Text("233.33", style: AppTheme.bigestTextStyle),
                         ],
                       ),
                       Column(
@@ -84,7 +84,7 @@ class _PersonalCenterPageState extends State<PersonalCenterPage> {
                               style: AppTheme.subtitleTextStyle.copyWith(
                                 color: AppTheme.activeWhenPressed,
                               )),
-                          Text("67", style: AppTheme.bigestTextStyle),
+                          Text("0.00", style: AppTheme.bigestTextStyle),
                         ],
                       ),
                     ],

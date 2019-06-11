@@ -1,0 +1,50 @@
+﻿/*
+* 提示：
+*   1.在[]内的各个不同内容要用英文的","隔开，但最后一个后面不要加","，如labels和images所示。
+*   2.尽量所有的标题、描述、标签、分类和图片都对应上，否则不对应看着不舒服。
+*/
+
+////// 从这开始改 //////
+
+Idle(
+    myself,                     //所属用户，暂不用改
+    title: "i7 8700/GTX1060升1660台式电脑主机全套高配吃鸡游戏主机电竞网吧水冷组装整机",               //标题，如：魅族蓝牙耳机
+    category: categories[6],    //分类看下面，从0开始编号，选择一个分类
+    labels: [                   //标签，如："耳机", "电子产品"
+      "组装机",
+      "电子产品"
+    ],
+    price: 4333.00,              //价格，保留两位小数，如：233.33
+    idleType: EIdleType.Sell,   //发布闲置的类型，暂不用改
+    description: "学长马上毕业了，现在特惠处理一年前买的组装机，运行完全正常",         //描述，如："本想运动时戴，可惜懒癌附体，一年下来也没动过，耳机几乎放着吃灰"
+    images: [                   //图片，只改"xxx"内的图片网络链接，如："https://cdn.xxx.com/xxx.jpg", 可以添加多个图片，按照格式添加。
+      Image.network(
+        "https://img.alicdn.com/imgextra/i2/1652528654/O1CN01jHGeUC2Dna5b2gBAc_!!1652528654.jpg",                  //只改这个地方，填入图片链接。
+        fit: BoxFit.cover,      //图片缩放类型，不要改
+      ),
+      Image.network(
+        "https://img.alicdn.com/imgextra/i3/1652528654/O1CN01rWKhQH2Dna4GpqnTO_!!1652528654.jpg",
+        fit: BoxFit.cover,
+      ),
+    ],
+),
+
+////// 改到这里结束 //////
+
+List<String> categories = [
+  '生活用品',
+  '电子数码',
+  '摆件装饰',
+  '图书文具',
+  '运动器材',
+  '体育用品',
+  '其它'
+];
+
+登录账号密码：
+
+      account = "hfut12138@qq.com";
+      password = "123456";
+或
+      account = "loki12138@qq.com";
+      password = "654321";

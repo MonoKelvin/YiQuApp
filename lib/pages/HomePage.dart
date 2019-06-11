@@ -47,10 +47,6 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    // 获得设备像素比列
-    // MediaQueryData queryData;
-    // queryData = MediaQuery.of(context);
-    // print(queryData.devicePixelRatio);
 
     return Scaffold(
       backgroundColor: AppTheme.widgetBackground,
@@ -65,9 +61,6 @@ class _HomePageState extends State<HomePage> {
         },
         child: Icon(Icons.add, color: AppTheme.mainBackground),
       ),
-
-      // 中间的添加物品的按钮
-      // floatingActionButtonLocation: FloatingActionButtonLocation.startTop,
 
       // 主要内容
       body: SafeArea(
@@ -134,7 +127,7 @@ class _HomePageState extends State<HomePage> {
                                       ],
                                     ),
                                   ),
-                                  _customPriceMenuItem(),
+                                  //_customPriceMenuItem(),
                                 ],
                           ),
                           Expanded(
@@ -149,7 +142,7 @@ class _HomePageState extends State<HomePage> {
                             ),
                           ),
                           SizedBox(width: 8.0),
-                          _showNotification(),
+                          //_showNotification(6),
                         ],
                       ),
                     ),
@@ -196,12 +189,12 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  Badge _showNotification() {
+  Badge _showNotification(int count) {
     return Badge(
       padding: EdgeInsets.all(4.0),
       position: BadgePosition.bottomLeft(bottom: 12.0, left: 12.0),
       badgeColor: AppTheme.mainRed,
-      badgeContent: Text('6',
+      badgeContent: Text(count.toString(),
           style: AppTheme.subTextStyle
               .copyWith(color: AppTheme.mainBackground, fontSize: 8.0)),
       child: Icon(Icons.notifications),

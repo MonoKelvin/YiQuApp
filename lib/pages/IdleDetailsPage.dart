@@ -45,6 +45,7 @@ class _IdleDetailsPageState extends State<IdleDetailsPage> {
       body: SingleChildScrollView(
         child: Column(
           children: <Widget>[
+            SizedBox(height: 16.0),
             HeadIconWidget(
               user: widget.idle.getUser,
               radius: 50.0,
@@ -122,8 +123,8 @@ class _IdleDetailsPageState extends State<IdleDetailsPage> {
             //   ),
             // ),
 
-            Padding(
-              padding: const EdgeInsets.all(10.0),
+            Container(
+              padding: const EdgeInsets.all(16.0),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
@@ -170,6 +171,8 @@ class _IdleDetailsPageState extends State<IdleDetailsPage> {
                 ],
               ),
             ),
+
+            SizedBox(height: 40.0),
 
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -226,7 +229,7 @@ class _IdleDetailsPageState extends State<IdleDetailsPage> {
             ),
 
             Padding(
-              padding: EdgeInsets.only(top: 60.0, bottom: 40.0),
+              padding: EdgeInsets.only(top: 40.0, bottom: 40.0),
               child: Text(
                 "— 我是有底线的 (*•ω•) —",
                 style: AppTheme.inactiveTextStyle.copyWith(fontSize: 12.0),

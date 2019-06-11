@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:yiqu/data/Idle.dart';
 // import 'package:http/http.dart' as http;
 import 'package:yiqu/data/AppConfig.dart';
 import 'package:yiqu/pages/IdleDetailsPage.dart';
-import 'package:yiqu/pages/MessagePage.dart';
+import 'package:yiqu/pages/SendMessagePage.dart';
 import 'package:yiqu/widgets/HeadIconWidget.dart';
 import 'package:yiqu/widgets/IconButtonWidget.dart';
 import 'package:yiqu/widgets/ImageBlockWidget.dart';
@@ -66,7 +67,8 @@ class _IdleInfoCardWidgetState extends State<IdleInfoCardWidget> {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (BuildContext context) => IdleDetailsPage(idle: widget.idle),
+                  builder: (BuildContext context) =>
+                      IdleDetailsPage(idle: widget.idle),
                 ),
               );
             },
@@ -77,7 +79,11 @@ class _IdleInfoCardWidgetState extends State<IdleInfoCardWidget> {
               children: <Widget>[
                 // TODO: Use Image Form Server.
                 // 图片内容，默认图片选第一张
-                ImageBlockWidget(image: widget.idle.images[0].image, width: 110,height: 110.0,),
+                ImageBlockWidget(
+                  image: widget.idle.images[0].image,
+                  width: 110,
+                  height: 110.0,
+                ),
 
                 // 必须先使用 Expanded 把剩余部分撑开。
                 Expanded(
@@ -118,8 +124,16 @@ class _IdleInfoCardWidgetState extends State<IdleInfoCardWidget> {
                                 //头像展示
                                 HeadIconWidget(user: widget.idle.getUser),
                                 SizedBox(height: 4.0),
-                                Text("@${widget.idle.getUser.getUserName}",
-                                    style: AppTheme.inactiveTextStyle),
+                                SizedBox(
+                                  width: 80.0,
+                                  child: Text(
+                                    "@${widget.idle.getUser.getUserName}",
+                                    style: AppTheme.inactiveTextStyle,
+                                    overflow: TextOverflow.ellipsis,
+                                    maxLines: 1,
+                                    textAlign: TextAlign.center,
+                                  ),
+                                ),
                               ],
                             )
                           ],
@@ -139,10 +153,10 @@ class _IdleInfoCardWidgetState extends State<IdleInfoCardWidget> {
                         ),
 
                         Text(
-                            "发布时间：${widget.idle.getMonthAndDay()}",
-                            style: AppTheme.inactiveTextStyle,
-                            textDirection: TextDirection.rtl,
-                          ),
+                          "发布时间：${widget.idle.getMonthAndDay()}",
+                          style: AppTheme.inactiveTextStyle,
+                          textDirection: TextDirection.rtl,
+                        ),
                       ],
                     ),
                   ),
@@ -173,7 +187,7 @@ class _IdleInfoCardWidgetState extends State<IdleInfoCardWidget> {
                     context,
                     MaterialPageRoute(
                       builder: (BuildContext context) =>
-                          MessagePage(friendUser: widget.idle.getUser),
+                          SendMessagePage(friendUser: widget.idle.getUser),
                     ),
                   );
                 },
