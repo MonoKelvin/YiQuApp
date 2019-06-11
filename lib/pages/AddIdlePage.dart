@@ -324,13 +324,12 @@ class _AddIdlePageState extends State<AddIdlePage> {
             RoundedButtonWidget(
               child: Icon(Icons.check, color: AppTheme.mainBackground),
               onPressed: () {
-
                 if (_imgBlockList.length > 1) {
                   // 跳过第一张添加图片的控件
                   _preIdle.images = [];
                   int i = 0;
                   for (var img
-                      in _imgBlockList.skip(1).cast<ImageBlockWidget>()) {
+                      in _imgBlockList.sublist(1).cast<ImageBlockWidget>()) {
                     _preIdle.images[i] = Image(image: img.image);
                     i++;
                   }
@@ -360,11 +359,12 @@ class _AddIdlePageState extends State<AddIdlePage> {
                 }
 
                 _preIdle.regenerateReleaseTime();
-                myIdles.insert(0, _preIdle);
+                AppData.allIdles.insert(0, _preIdle);
                 PromptWidgetDialog.showAndWaitSecondToClose(
                   context,
                   contents: "添加成功，快去首页看看吧！Y(^o^)Y ",
-                  child: Icon(Icons.check, size: 54.0, color: AppTheme.mainGreen),
+                  child:
+                      Icon(Icons.check, size: 54.0, color: AppTheme.mainGreen),
                 );
               },
             ),

@@ -1,0 +1,13 @@
+﻿
+{
+    "uuid": "1d0f5287-8c3b-11e9-a25a-0235d2b38928",
+    "userName": "中野一花", 
+    "account": "wudengfende111",  
+    "password": "111111", 
+    "address": "日本东京xx市xx大厦",
+    "headImage": "https://image.baidu.com/search/detail?ct=503316480&z=&tn=baiduimagedetail&ipn=d&word=%E4%B8%AD%E9%87%8E%E4%B8%80%E8%8A%B1&step_word=&ie=utf-8&in=&cl=2&lm=-1&st=-1&hd=&latest=&copyright=&cs=3408850412,605416230&os=221843528,382003910&simid=3463211980,210138758&pn=5&rn=1&di=3190&ln=758&fr=&fmq=1560252088229_R&ic=&s=undefined&se=&sme=&tab=0&width=&height=&face=undefined&is=0,0&istype=2&ist=&jit=&bdtype=0&spn=0&pi=0&gsm=0&objurl=http%3A%2F%2Fb-ssl.duitang.com%2Fuploads%2Fitem%2F201810%2F21%2F20181021183216_zAJcT.jpeg&rpstart=0&rpnum=0&adpicid=0&force=undefined", 
+    "gender": "女",  
+    "signiture": "我永远喜欢上杉风太郎"
+}
+
+

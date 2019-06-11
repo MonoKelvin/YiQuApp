@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:yiqu/data/AppConfig.dart';
+import 'package:yiqu/data/Idle.dart';
 import 'package:yiqu/pages/AddIdlePage.dart';
-import 'package:yiqu/widgets/CategoriesScrollBarWidget.dart';
 import 'package:yiqu/widgets/IconButtonWidget.dart';
 import 'package:yiqu/widgets/IdleCardWidget.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
@@ -17,13 +17,17 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   RefreshController _refreshController;
-  // String _orderValue;
+  List<String> _categories = [];
+  int isActive = 0;
+  int currentPage = 0;
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
-
+    _categories.add("全部");
+    categories.forEach((x) {
+      _categories.add(x);
+    });
     _refreshController = RefreshController(initialRefresh: true);
   }
 
@@ -47,7 +51,6 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       backgroundColor: AppTheme.widgetBackground,
 
@@ -55,9 +58,9 @@ class _HomePageState extends State<HomePage> {
       floatingActionButton: RoundedButtonWidget(
         onPressed: () {
           Navigator.push(
-              context,
-              MaterialPageRoute(
-                  builder: (BuildContext context) => AddIdlePage()));
+            context,
+            MaterialPageRoute(builder: (BuildContext context) => AddIdlePage()),
+          );
         },
         child: Icon(Icons.add, color: AppTheme.mainBackground),
       ),
@@ -80,6 +83,7 @@ class _HomePageState extends State<HomePage> {
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: <Widget>[
                           PopupMenuButton(
+                            elevation: 16.0,
                             icon: Icon(Icons.sort),
                             offset: Offset(14, 36),
                             // TODO: 实现它
@@ -146,7 +150,42 @@ class _HomePageState extends State<HomePage> {
                         ],
                       ),
                     ),
-                    Expanded(child: CategoriesScrollBarWidget()),
+
+                    //分类条
+                    Expanded(
+                      child: Container(
+                        padding: EdgeInsets.only(left: 8.0, right: 8.0),
+                        color: AppTheme.mainBackground,
+                        child: ListView.builder(
+                          scrollDirection: Axis.horizontal,
+                          itemCount: _categories.length,
+                          itemBuilder: (BuildContext context, int index) {
+                            return Column(
+                              children: <Widget>[
+                                // Icon(Icons.local_mall),
+                                FlatButton(
+                                  child: Text(
+                                    _categories[index],
+                                    style: AppTheme.titleTextStyle.copyWith(
+                                        color: index == currentPage
+                                            ? AppTheme.mainDark
+                                            : AppTheme.inactive),
+                                  ),
+                                  disabledTextColor: AppTheme.activeWhenPressed,
+                                  splashColor: AppTheme.mainBackground,
+                                  highlightColor: AppTheme.mainBackground,
+                                  onPressed: () {
+                                    setState(() {
+                                      currentPage = index;
+                                    });
+                                  },
+                                ),
+                              ],
+                            );
+                          },
+                        ),
+                      ),
+                    ),
                   ],
                 ),
                 decoration: BoxDecoration(
@@ -163,23 +202,42 @@ class _HomePageState extends State<HomePage> {
 
               //主要内容
               Expanded(
-                child: SmartRefresher(
-                  enablePullDown: true,
-                  enablePullUp: true,
-                  header: WaterDropMaterialHeader(),
-                  controller: _refreshController,
-                  onRefresh: _onRefresh,
-                  onLoading: _onLoading,
-                  child: ListView.builder(
-                    shrinkWrap: true,
-                    physics: AlwaysScrollableScrollPhysics(),
-                    padding: EdgeInsets.all(8.0),
-                    // TODO: 商品来源服务器
-                    itemCount: myIdles.length,
-                    itemBuilder: (BuildContext context, int index) {
-                      return IdleInfoCardWidget(idle: myIdles[index]);
-                    },
-                  ),
+                child: PageView(
+                  onPageChanged: (int page) {
+                    setState(() {
+                      currentPage = page;
+                    });
+                  },
+                  controller: PageController(initialPage: 0),
+                  children: _categories.map((String cat) {
+                    List<Idle> curIdles = [];
+                    AppData.allIdles.forEach((_idle) {
+                      if (currentPage == 0) {
+                        curIdles.add(_idle);
+                      } else if (_idle.category == cat) {
+                        curIdles.add(_idle);
+                      }
+                    });
+
+                    return SmartRefresher(
+                      enablePullDown: true,
+                      enablePullUp: true,
+                      // header: WaterDropMaterialHeader(),
+                      controller: _refreshController,
+                      onRefresh: _onRefresh,
+                      onLoading: _onLoading,
+                      child: ListView.builder(
+                        shrinkWrap: true,
+                        physics: AlwaysScrollableScrollPhysics(),
+                        padding: EdgeInsets.all(8.0),
+                        // TODO: 商品来源服务器
+                        itemCount: curIdles.length,
+                        itemBuilder: (BuildContext context, int index) {
+                          return IdleInfoCardWidget(idle: curIdles[index]);
+                        },
+                      ),
+                    );
+                  }).toList(),
                 ),
               ),
             ],
@@ -222,9 +280,8 @@ class _HomePageState extends State<HomePage> {
             children: <Widget>[
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 4.0),
-                child: Text("￥", style: AppTheme.inactiveTextStyle.copyWith(
-                  fontSize: 16.0
-                )),
+                child: Text("￥",
+                    style: AppTheme.inactiveTextStyle.copyWith(fontSize: 16.0)),
               ),
               Expanded(
                 child: Container(
@@ -238,9 +295,8 @@ class _HomePageState extends State<HomePage> {
               ),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 4.0),
-                child: Text("~", style: AppTheme.inactiveTextStyle.copyWith(
-                  fontSize: 16.0
-                )),
+                child: Text("~",
+                    style: AppTheme.inactiveTextStyle.copyWith(fontSize: 16.0)),
               ),
               Expanded(
                 child: Container(
@@ -264,7 +320,6 @@ class _HomePageState extends State<HomePage> {
           ),
         ],
       ),
-
     );
   }
 }

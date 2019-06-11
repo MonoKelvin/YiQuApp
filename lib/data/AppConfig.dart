@@ -119,94 +119,6 @@ class AppTheme {
 User myself = new User();
 User friend = new User();
 
-// TODO: 不应该直接给出，应要动态创建内容
-/// #### 我的所有商品
-List<Idle> myIdles = [
-  Idle(
-    AppData.allUsers[0],
-    title: "魅族EP51蓝牙耳机",
-    category: categories[2],
-    labels: ["耳机", "魅族"],
-    price: 99.00,
-    idleType: EIdleType.Sell,
-    description: "本想运动时戴，可惜懒癌附体，一年下来也没动过，耳机几乎放着吃灰。",
-    images: [
-      Image.network(
-        "https://cdn.pixabay.com/photo/2015/03/17/14/05/sparkler-677774_960_720.jpg",
-        fit: BoxFit.cover,
-      ),
-      Image.network(
-        "https://cdn.pixabay.com/photo/2019/05/09/19/13/meteora-4191906_960_720.jpg",
-        fit: BoxFit.cover,
-      ),
-      Image.network(
-        "https://cdn.pixabay.com/photo/2018/09/16/12/29/sailing-vessel-3681418_960_720.jpg",
-        fit: BoxFit.cover,
-      ),
-    ],
-  ),
-  Idle(
-    AppData.allUsers[1],
-    title: "YSL方管小金条21圣罗兰杨树林口红",
-    category: categories[3],
-    labels: ["口红", "化妆品"],
-    price: 149.00,
-    idleType: EIdleType.Change,
-    description: "品牌型号:圣罗兰新旧程度:全新转手原因:朋友给带的口红不太适合自己，送给有缘人",
-    images: [
-      Image.network(
-        "https://cdn.pixabay.com/photo/2018/09/16/12/29/sailing-vessel-3681418_960_720.jpg",
-        fit: BoxFit.cover,
-      ),
-    ],
-  ),
-  Idle(
-    AppData.allUsers[2],
-    title: "铁艺服装架服装店衣架展示架落地式女装店陈列中岛架",
-    category: categories[3],
-    labels: ["衣架", "女装", "装饰"],
-    price: 104.65,
-    idleType: EIdleType.Sell,
-    description: "颜色分类F款【长55】",
-    images: [
-      Image.network(
-        "https://cdn.pixabay.com/photo/2019/05/09/19/13/meteora-4191906_960_720.jpg",
-        fit: BoxFit.cover,
-      ),
-    ],
-  ),
-  Idle(
-    AppData.allUsers[3],
-    title: "ysl唇釉12",
-    category: categories[3],
-    labels: ["化妆品", "口红"],
-    price: 150.00,
-    idleType: EIdleType.Sell,
-    description: "圣罗兰金管唇釉12 自用正品 掉漆 余量如图 可以买回去试色用 价格可商量",
-    images: [
-      Image.network(
-        "https://cdn.pixabay.com/photo/2016/04/10/21/34/woman-1320810_960_720.jpg",
-        fit: BoxFit.cover,
-      ),
-    ],
-  ),
-  Idle(
-    friend,
-    title: "施华洛世奇项链",
-    category: categories[1],
-    labels: ["项链", "首饰"],
-    price: 200.00,
-    idleType: EIdleType.Sell,
-    description: "去年八月中旬月份买的，因为脖子粗了，待着不好看。有喜欢的宝宝，可以看一下保证正品小天鹅",
-    images: [
-      Image.network(
-        "https://cdn.pixabay.com/photo/2018/09/16/12/29/sailing-vessel-3681418_960_720.jpg",
-        fit: BoxFit.cover,
-      ),
-    ],
-  ),
-];
-
 class Message {
   bool isMe;
   String contents;
@@ -219,6 +131,7 @@ class AppData {
   static Map<User, List<Message>> messagesList = ({});
   //Map<User, List<ChatMessage>>;
 
+  // 6个用户 + myself
   static List<User> allUsers = [
     User.create(
       "天才小熊猫",
@@ -267,6 +180,192 @@ class AppData {
       ),
       "男",
       "I can do this all day!",
+    ),
+    User.create(
+      "XRDS0909",
+      "89745@qq.com",
+      "123123",
+      "合肥工业大学三号宿舍419",
+      Image.network(
+        "https://ss0.bdstatic.com/94oJfD_bAAcT8t7mm9GUKT-xh_/timg?image&quality=100&size=b4000_4000&sec=1560246423&di=93c25b0dd009eea3973d0e123678db88&src=http://img3.duitang.com/uploads/item/201605/07/20160507191419_J2m8R.thumb.700_0.jpeg",
+        fit: BoxFit.cover,
+      ),
+      "男",
+      "走自己的路，让别人说去吧",
+    ),
+    User.create(
+      "asd8976",
+      "4302@163.com",
+      "123123",
+      "合肥工业大学四号宿舍420",
+      Image.network(
+        "https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=3702304829,2844936810&fm=26&gp=0.jpg",
+        fit: BoxFit.cover,
+      ),
+      "男",
+      "I can do this all day!",
+    ),
+  ];
+
+// TODO: 不应该直接给出，应要动态创建内容
+  /// #### 我的所有商品
+  static List<Idle> allIdles = [
+    Idle(
+      AppData.allUsers[0],
+      title: "高等数学同济版上下册",
+      category: categories[3],
+      labels: ["书", "图书文具"],
+      price: 43.00,
+      idleType: EIdleType.Sell,
+      description: "学长特别处理高等数学教材了，同济版较为简单",
+      images: [
+        Image.network(
+          "https://img.alicdn.com/imgextra/i2/2468631159/TB2i1tchmtkpuFjy0FhXXXQzFXa_!!2468631159.jpg", //只改这个地方，填入图片链接。
+          fit: BoxFit.cover,
+        ),
+        Image.network(
+          "https://img.alicdn.com/imgextra/i4/2468631159/TB2JTbRixxmpuFjSZFNXXXrRXXa_!!2468631159.jpg",
+          fit: BoxFit.cover,
+        ),
+      ],
+    ),
+    Idle(
+      AppData.allUsers[1], //所属用户，暂不用改
+      title: "统一汤达人方便面袋装泡面整箱酸辣豚骨拉面罗宋汤共15包", //标题，如：魅族蓝牙耳机
+      category: categories[6], //分类看下面，从0开始编号，选择一个分类
+      labels: [
+        //标签，如："耳机", "电子产品"
+        "泡面",
+        "美食"
+      ],
+      price: 51.00, //价格，保留两位小数，如：233.33
+      idleType: EIdleType.Sell, //发布闲置的类型，暂不用改
+      description:
+          "双十一买了好多箱结果买多吃不完了，现在特别处理一箱泡面", //描述，如："本想运动时戴，可惜懒癌附体，一年下来也没动过，耳机几乎放着吃灰"
+      images: [
+        //图片，只改"xxx"内的图片网络链接，如："https://cdn.xxx.com/xxx.jpg", 可以添加多个图片，按照格式添加。
+        Image.network(
+          "https://img.alicdn.com/imgextra/i4/1014978183/TB2fUOTAr9YBuNjy0FgXXcxcXXa_!!1014978183.jpg", //只改这个地方，填入图片链接。
+          fit: BoxFit.cover, //图片缩放类型，不要改
+        ),
+        Image.network(
+          "https://img.alicdn.com/imgextra/i2/1014978183/TB2lZX5AAyWBuNjy0FpXXassXXa_!!1014978183.jpg",
+          fit: BoxFit.cover,
+        ),
+      ],
+    ),
+    Idle(
+      AppData.allUsers[2],
+      title: "洗发水",
+      category: categories[0],
+      labels: ["日用品", "生活用品"],
+      price: 20.00,
+      idleType: EIdleType.Sell,
+      description: "洗发水买多了，低价出售",
+      images: [
+        Image.network(
+          "http://cdimg.good.cc/images/MainImg/0x0/0/4352/4352815.jpg_w300.jpg?r=519202721",
+          fit: BoxFit.cover, //图片缩放类型，不要改
+        ),
+      ],
+    ),
+    Idle(
+      AppData.allUsers[3],
+      title: "单反相机",
+      category: categories[1],
+      labels: ["照相机", "数码产品"],
+      price: 3999.00,
+      idleType: EIdleType.Sell,
+      description: "全新单反，低价出售",
+      images: [
+        Image.network(
+          "http://img003.hc360.cn/g8/M08/AC/0C/wKhQtVNHdMOETKdCAAAAAJu1adg112.jpg",
+          fit: BoxFit.cover,
+        ),
+      ],
+    ),
+    Idle(
+      AppData.allUsers[4],
+      title: "混沌摆",
+      category: categories[2],
+      labels: ["摆件装饰", "趣物"],
+      price: 200.00,
+      idleType: EIdleType.Sell,
+      description: "这个没什么用，有想要的直接拿走",
+      images: [
+        Image.network(
+          "http://img.go007.com/2017/12/11/5606d0916d1b626f_0.jpg",
+          fit: BoxFit.cover,
+        ),
+      ],
+    ),
+    Idle(
+      AppData.allUsers[5],
+      title: "人性的弱点",
+      category: categories[3],
+      labels: ["书籍", "读物"],
+      price: 10.00,
+      idleType: EIdleType.Sell,
+      description: "读完了，九成新，有意者联系",
+      images: [
+        Image.network(
+          "http://m.360buyimg.com/n12/18270/735ea0e2-0dcd-4e1a-bbcd-d3320ec1e3cc.jpg%21q70.jpg",
+          fit: BoxFit.cover,
+        ),
+      ],
+    ),
+    Idle(
+      myself,
+      title: "跳绳",
+      category: categories[4],
+      labels: ["运动用品", "体育用品"],
+      price: 2.00,
+      idleType: EIdleType.Sell,
+      description: "不想要了，速度出了",
+      images: [
+        Image.network(
+          "http://img005.hc360.cn/g7/M05/51/8D/wKhQtFQB2aiEHzFzAAAAAOr1YFM617.jpg",
+          fit: BoxFit.cover,
+        ),
+      ],
+    ),
+    Idle(
+      AppData.allUsers[0],
+      title: "握力器",
+      category: categories[5],
+      labels: ["运动用品", "体育用品"],
+      price: 20.00,
+      idleType: EIdleType.Sell,
+      description: "不想要了，速度出了",
+      images: [
+        Image.network(
+          "http://fs1.shop123.com.tw/300135/upload/product/3001354112pic_outside_969679.jpg",
+          fit: BoxFit.cover,
+        ),
+      ],
+    ),
+    Idle(
+      AppData.allUsers[3],
+      title: "Nike 耐克官方NIKE LEGEND TRAINER男子训练鞋 924206",
+      category: categories[5],
+      labels: [
+        "运动鞋",
+        "运动用品"
+      ],
+      price: 389.00,
+      idleType: EIdleType.Sell,
+      description:
+          "买来穿了几次而已，发现不合脚想要卖出去",
+      images: [
+        Image.network(
+          "https://img.alicdn.com/imgextra/i4/890482188/O1CN01OziFQp1S294DQaFCa_!!890482188.jpg", //只改这个地方，填入图片链接。
+          fit: BoxFit.cover,
+        ),
+        Image.network(
+          "https://img.alicdn.com/imgextra/i4/890482188/O1CN017JnhCh1S295VY7uIi_!!890482188.jpg",
+          fit: BoxFit.cover,
+        ),
+      ],
     ),
   ];
 }

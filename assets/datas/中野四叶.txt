@@ -1,0 +1,13 @@
+﻿
+{
+    "uuid": "df3814f7-8c3b-11e9-a25a-0235d2b38928",
+    "userName": "中野四叶", 
+    "account": "wudengfende444",  
+    "password": "11101", 
+    "address": "日本东京xx市xx大厦",
+    "headImage": "https://image.baidu.com/search/detail?ct=503316480&z=&tn=baiduimagedetail&ipn=d&word=%E4%B8%AD%E9%87%8E%E5%9B%9B%E5%8F%B6&step_word=&ie=utf-8&in=&cl=2&lm=-1&st=-1&hd=&latest=&copyright=&cs=176405534,1735497180&os=4195463609,2531843400&simid=0,0&pn=0&rn=1&di=22110&ln=377&fr=&fmq=1560252465283_R&ic=&s=undefined&se=&sme=&tab=0&width=&height=&face=undefined&is=0,0&istype=2&ist=&jit=&bdtype=0&spn=0&pi=0&gsm=0&objurl=http%3A%2F%2Fi0.hdslb.com%2Fbfs%2Farticle%2Fad760b3be0ffa86c8b0947df1d95b14cb6c87ba7.jpg&rpstart=0&rpnum=0&adpicid=0&force=undefined", 
+    "gender": "女",  
+    "signiture": "我永远喜欢上杉风太郎"
+}
+
+

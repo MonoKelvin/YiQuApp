@@ -58,9 +58,9 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     _getLoginState(context);
     return MaterialApp(
-      home: YiQuApp(),//LoginPage(),
-          // ? LoginPage()
-          // : YiQuApp(),
+      home: LoginPage(),
+      // ? LoginPage()
+      // : YiQuApp(),
       debugShowCheckedModeBanner: false,
       theme: Theme.of(context).copyWith(
           // buttonColor: AppTheme.mainDark,
@@ -75,6 +75,7 @@ class MyApp extends StatelessWidget {
           disabledColor: AppTheme.widgetBackground,
           splashColor: AppTheme.mainBackground,
           hintColor: AppTheme.inactive,
+          highlightColor: AppTheme.mainBackground,
 
           // accentColor: AppTheme.mainBlue,
           // accentTextTheme: TextTheme(
@@ -85,7 +86,6 @@ class MyApp extends StatelessWidget {
           // ),
 
           scaffoldBackgroundColor: AppTheme.mainBackground,
-          highlightColor: AppTheme.mainBackground,
           cursorColor: AppTheme.mainDark,
           appBarTheme: AppBarTheme.of(context).copyWith(
             color: AppTheme.mainBackground,

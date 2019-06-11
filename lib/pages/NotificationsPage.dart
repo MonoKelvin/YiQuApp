@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:yiqu/data/AppConfig.dart';
 import 'package:yiqu/data/User.dart';
+import 'package:yiqu/pages/SendMessagePage.dart';
 import 'package:yiqu/widgets/HeadIconWidget.dart';
+import 'package:yiqu/widgets/IconButtonWidget.dart';
 
 class NotificationsPage extends StatefulWidget {
   @override
@@ -106,11 +108,28 @@ class _NotificationsPageState extends State<NotificationsPage> {
                             style: AppTheme.titleTextStyle),
                       ],
                     ),
-                    Text(
-                      "你们有${AppData.messagesList[_users[index]].length}条消息来往",
-                      style: AppTheme.subtitleTextStyle
-                          .copyWith(color: AppTheme.inactive),
-                    )
+                    Row(
+                      children: <Widget>[
+                        Text(
+                          "你们有${AppData.messagesList[_users[index]].length}条消息来往",
+                          style: AppTheme.subtitleTextStyle
+                              .copyWith(color: AppTheme.inactive),
+                        ),
+                        IconButtonWidget(
+                          iconData: Icons.send,
+                          onPressed: () {
+                            //TODO: 跳转到发送消息的界面
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (BuildContext context) =>
+                                    SendMessagePage(friendUser: _users[index]),
+                              ),
+                            );
+                          },
+                        ),
+                      ],
+                    ),
                   ],
                 ),
               ),
