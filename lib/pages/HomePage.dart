@@ -210,15 +210,14 @@ class _HomePageState extends State<HomePage> {
                   },
                   controller: PageController(initialPage: 0),
                   children: _categories.map((String cat) {
-                    List<Idle> curIdles = [];
+                    List<Idle> _curIdles = [];
                     AppData.allIdles.forEach((_idle) {
                       if (currentPage == 0) {
-                        curIdles.add(_idle);
+                        _curIdles = AppData.allIdles;
                       } else if (_idle.category == cat) {
-                        curIdles.add(_idle);
+                        _curIdles.add(_idle);
                       }
                     });
-
                     return SmartRefresher(
                       enablePullDown: true,
                       enablePullUp: true,
@@ -231,9 +230,9 @@ class _HomePageState extends State<HomePage> {
                         physics: AlwaysScrollableScrollPhysics(),
                         padding: EdgeInsets.all(8.0),
                         // TODO: 商品来源服务器
-                        itemCount: curIdles.length,
+                        itemCount: _curIdles.length,
                         itemBuilder: (BuildContext context, int index) {
-                          return IdleInfoCardWidget(idle: curIdles[index]);
+                          return IdleInfoCardWidget(idle: _curIdles[index]);
                         },
                       ),
                     );

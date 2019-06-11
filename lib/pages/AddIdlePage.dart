@@ -327,12 +327,13 @@ class _AddIdlePageState extends State<AddIdlePage> {
                 if (_imgBlockList.length > 1) {
                   // 跳过第一张添加图片的控件
                   _preIdle.images = [];
-                  int i = 0;
-                  for (var img
-                      in _imgBlockList.sublist(1).cast<ImageBlockWidget>()) {
-                    _preIdle.images[i] = Image(image: img.image);
-                    i++;
-                  }
+
+                  _imgBlockList
+                      .sublist(1)
+                      .cast<ImageBlockWidget>()
+                      .forEach((img) {
+                    _preIdle.images.add(Image(image: img.image));
+                  });
                 } else {
                   showToast(" 请添加几张照片好不好呀 (*︾▽︾) ");
                   return;
