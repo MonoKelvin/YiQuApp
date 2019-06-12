@@ -5,7 +5,7 @@
 =======
 # yiqu
 
-A new Flutter project.
+基于谷歌 Flutter 框架开发的校园二手交易平台
 
 ## Getting Started
 
