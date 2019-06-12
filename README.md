@@ -1,10 +1,6 @@
 <<<<<<< HEAD
 # YiQuApp
 
-#### My First App
-=======
-# yiqu
-
 基于谷歌 Flutter 框架开发的校园二手交易平台
 
 ## Getting Started
