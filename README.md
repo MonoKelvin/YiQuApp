@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 # YiQuApp
 
 基于谷歌 Flutter 框架开发的校园二手交易平台
@@ -7,7 +7,7 @@
 
 [阅读*LICENSE*](https://github.com/Monoscript/YiQuApp/edit/developing/LICENSE)
 
-## Getting Started
+## 学习Flutter
 
 This project is a starting point for a Flutter application.
 
@@ -19,4 +19,3 @@ A few resources to get you started if this is your first Flutter project:
 For help getting started with Flutter, view our 
 [online documentation](https://flutter.dev/docs), which offers tutorials, 
 samples, guidance on mobile development, and a full API reference.
->>>>>>> Create App
