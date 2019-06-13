@@ -5,7 +5,7 @@
 
 ## 开源协议
 
-https://github.com/Monoscript/YiQuApp/edit/developing/LICENSE
+[阅读*LICENSE*](https://github.com/Monoscript/YiQuApp/edit/developing/LICENSE)
 
 ## Getting Started
 
