@@ -3,7 +3,7 @@
 
 基于谷歌 Flutter 框架开发的校园二手交易平台
 
-##开源协议
+## 开源协议
 
 https://github.com/Monoscript/YiQuApp/edit/developing/LICENSE
 
